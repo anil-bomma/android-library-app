@@ -53,10 +53,8 @@ public class RegistrationScreen extends AppCompatActivity {
         registerBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(RegistrationScreen.this,"Registered Successfully",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent();
-                setResult(1);
-                finish();
+                Intent intent = new Intent(RegistrationScreen.this,RegisrationVerificationScreen.class);
+                startActivity(intent);
             }
         });
 
@@ -66,9 +64,8 @@ public class RegistrationScreen extends AppCompatActivity {
         loginTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                setResult(1);
-                finish();
+                Intent intent = new Intent(RegistrationScreen.this,LoginActivity.class);
+                startActivity(intent);
             }
         });
     }
