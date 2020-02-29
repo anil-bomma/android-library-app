@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegistrationScreen.class);
-                startActivityForResult(intent,1);
+                startActivity(intent);
             }
         });
     }
