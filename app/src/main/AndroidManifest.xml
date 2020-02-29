@@ -11,6 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".RegisrationVerificationScreen"></activity>
         <activity android:name=".RegistrationScreen" />
+        <activity android:name=".UserScreen"></activity>
+        <activity android:name=".DepartmentAdminScreen" />
+        <activity android:name=".AdminScreen" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

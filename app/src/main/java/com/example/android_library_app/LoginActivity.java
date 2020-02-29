@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     public void authenticateUsernamePassword(View v) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("role", "admin");
+        intent.putExtra("userId", "1234");
         startActivity(intent);
         finish();
     }
