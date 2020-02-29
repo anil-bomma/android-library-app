@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText usernameET, passwordET;
+    EditText emailIdET, passwordET;
     TextView registerTV;
 
     @Override
