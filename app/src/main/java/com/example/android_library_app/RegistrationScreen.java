@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class RegistrationScreen extends AppCompatActivity {
 //    implements AdapterView.OnItemSelectedListener
 
@@ -20,11 +22,18 @@ public class RegistrationScreen extends AppCompatActivity {
     Button registerBTN;
     TextView loginTV;
     EditText firstnameET, lastnameET, studentIdET, emailIdET, passwordET;
-//    Spinner rolesSP;
+
+    //    Spinner rolesSP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_screen);
+
+        firstnameET = findViewById(R.id.firstnameET);
+        lastnameET = findViewById(R.id.lastnameET);
+        studentIdET = findViewById(R.id.studentIdET);
+        emailIdET = findViewById(R.id.emailIdET);
+        passwordET = findViewById(R.id.passwordET);
 
 
 //        // Code for spinner for role attribute
@@ -48,13 +57,70 @@ public class RegistrationScreen extends AppCompatActivity {
 //        }
 
         // clicked on register button.
-        // will store the data and redirect to the login page
+        // will send verification code.
         registerBTN = findViewById(R.id.registerBTN);
         registerBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationScreen.this,RegisrationVerificationScreen.class);
-                startActivity(intent);
+
+                String firstname = firstnameET.getText().toString().trim();
+                String lastname = lastnameET.getText().toString().trim();
+                String studentId = studentIdET.getText().toString().trim();
+                String emailId = emailIdET.getText().toString().trim();
+                String password = passwordET.getText().toString().trim();
+
+                if (firstname.isEmpty()) {
+                    firstnameET.setError("please enter the first name");
+                }
+                if (lastname.isEmpty()) {
+                    lastnameET.setError("please enter the last name");
+                }
+                if (studentId.isEmpty()) {
+                    studentIdET.setError("please enter the 919 id");
+                }
+                if (emailId.isEmpty()) {
+                    emailIdET.setError("please enter the email id");
+                }
+                if (password.isEmpty()) {
+                    passwordET.setError("please enter the password");
+                }
+
+                // received all input attributes from user now send verification code
+                // and save in registration table
+                if (!firstname.isEmpty() && !lastname.isEmpty() && !studentId.isEmpty() &&
+                        !emailId.isEmpty() && !password.isEmpty()) {
+
+                    // build subject and message for login
+                    Random random = new Random();
+                    String vCode = String.format("%04d", random.nextInt(10000));
+                    String subject = "B.D. Owens Library, Registration verification code";
+                    String message = String.format(
+                            "Hello %s %s, here is the verification code for registration: %s" +
+                                    "%n%nThank you, %nTeam Library",
+                            firstname, lastname, vCode);
+
+                    // sending verification code to user and sending to next intent also
+                    GmailServer mailServer = new GmailServer(
+                            RegistrationScreen.this,
+                            emailId,
+                            subject,
+                            message
+                    );
+                    mailServer.execute();
+
+                    Intent registrationScreenIntent = new Intent(
+                            RegistrationScreen.this,
+                            RegisrationVerificationScreen.class
+                    );
+                    registrationScreenIntent.putExtra("firstname", firstname);
+                    registrationScreenIntent.putExtra("lastname", lastname);
+                    registrationScreenIntent.putExtra("studentId", studentId);
+                    registrationScreenIntent.putExtra("emailId", emailId);
+                    registrationScreenIntent.putExtra("password", password);
+                    registrationScreenIntent.putExtra("vCode", vCode);
+                    startActivity(registrationScreenIntent);
+
+                }
             }
         });
 
@@ -64,7 +130,7 @@ public class RegistrationScreen extends AppCompatActivity {
         loginTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrationScreen.this,LoginActivity.class);
+                Intent intent = new Intent(RegistrationScreen.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

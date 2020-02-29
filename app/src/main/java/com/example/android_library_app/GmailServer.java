@@ -18,13 +18,14 @@ import javax.mail.internet.MimeMessage;
 
 class GmailCredentials {
 
-    public static final String EMAILID = "libraryowens@gmail.com";
+    public static final String EMAIL = "libraryowens@gmail.com";
     public static final String PASSWORD = "Admin@123";
 
 }
 
-public class GmailServer extends AsyncTask<Void, Void, Void> {
+public class GmailServer extends AsyncTask<Void,Void,Void>  {
 
+    //Variables
     private Context mContext;
     private Session mSession;
 
@@ -46,7 +47,7 @@ public class GmailServer extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         //Show progress dialog while sending email
-        mProgressDialog = ProgressDialog.show(mContext, "Sending message", "Please wait...", false, false);
+        mProgressDialog = ProgressDialog.show(mContext,"Sending message", "Please wait...",false,false);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class GmailServer extends AsyncTask<Void, Void, Void> {
         mProgressDialog.dismiss();
 
         //Show success toast
-        Toast.makeText(mContext, "Message Sent", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,"Message Sent",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -64,6 +65,8 @@ public class GmailServer extends AsyncTask<Void, Void, Void> {
         //Creating properties
         Properties props = new Properties();
 
+        //Configuring properties for gmail
+        //If you are not using gmail you may need to change the values
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -75,10 +78,7 @@ public class GmailServer extends AsyncTask<Void, Void, Void> {
                 new javax.mail.Authenticator() {
                     //Authenticating the password
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(
-                                GmailCredentials.EMAILID,
-                                GmailCredentials.PASSWORD
-                        );
+                        return new PasswordAuthentication(GmailCredentials.EMAIL, GmailCredentials.PASSWORD);
                     }
                 });
 
@@ -87,7 +87,7 @@ public class GmailServer extends AsyncTask<Void, Void, Void> {
             MimeMessage mm = new MimeMessage(mSession);
 
             //Setting sender address
-            mm.setFrom(new InternetAddress(GmailCredentials.EMAILID));
+            mm.setFrom(new InternetAddress(GmailCredentials.EMAIL));
             //Adding receiver
             mm.addRecipient(Message.RecipientType.TO, new InternetAddress(mEmail));
             //Adding subject
@@ -98,7 +98,7 @@ public class GmailServer extends AsyncTask<Void, Void, Void> {
             Transport.send(mm);
 
         } catch (MessagingException e) {
-            Log.d("Mail", "unable to send message" + e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
