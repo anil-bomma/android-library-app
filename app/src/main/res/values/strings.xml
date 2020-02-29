@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Northwest Library</string>
-    
     <string-array name="roles">
         <item>Select the role</item>
         <item>Student</item>
