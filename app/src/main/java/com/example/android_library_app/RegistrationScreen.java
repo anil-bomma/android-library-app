@@ -13,31 +13,39 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RegistrationScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RegistrationScreen extends AppCompatActivity {
+//    implements AdapterView.OnItemSelectedListener
+
 
     Button registerBTN;
     TextView loginTV;
-    EditText nameET, IDnumberET, usernameRegisterET, passwordRegisterET;
-    Spinner rolesSP;
-
+    EditText firstnameET, lastnameET, studentIdET, emailIdET, passwordET;
+//    Spinner rolesSP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_screen);
 
 
-        // Code for spinner for role attribute
-        rolesSP = findViewById(R.id.rolesSP);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
-                (this, R.array.roles,R.layout.spinner_drop_down_layout );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        rolesSP.setAdapter(adapter);
-        // to store the element clicked.
-        rolesSP.setOnItemSelectedListener(this);
+//        // Code for spinner for role attribute
+//        rolesSP = findViewById(R.id.rolesSP);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+//                (this, R.array.roles,R.layout.spinner_drop_down_layout );
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        rolesSP.setAdapter(adapter);
+//        // to store the element clicked.
+//        rolesSP.setOnItemSelectedListener(this);
 
-
-
-
+//        @Override
+//        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//            String role = parent.getItemAtPosition(position).toString();
+//            Toast.makeText(parent.getContext(),"Selected as "+role,Toast.LENGTH_LONG).show();
+//        }
+//
+//        @Override
+//        public void onNothingSelected(AdapterView<?> parent) {
+//
+//        }
 
         // clicked on register button.
         // will store the data and redirect to the login page
@@ -65,14 +73,5 @@ public class RegistrationScreen extends AppCompatActivity implements AdapterView
         });
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String role = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),"Selected as "+role,Toast.LENGTH_LONG).show();
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

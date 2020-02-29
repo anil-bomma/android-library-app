@@ -14,80 +14,92 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/nameET"
+            android:id="@+id/firstnameET"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_text_back_ground"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="text"
+            android:paddingLeft="15dp"
+            android:textColor="@color/white"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/lastnameET"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_text_back_ground"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="Last Name"
+            android:paddingLeft="15dp"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/studentIdET"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edit_text_back_ground"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:paddingLeft="15dp"
+            android:hint="#919 Number"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/emailIdET"
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:background="@drawable/edit_text_back_ground"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:gravity="center"
-            android:hint="Name"
+            android:hint="Email ID"
+            android:paddingLeft="15dp"
             android:inputType="textPersonName"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textSize="20dp" />
+
+<!--        <Spinner-->
+<!--            android:id="@+id/rolesSP"-->
+<!--            android:layout_width="330dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@drawable/edit_text_back_ground"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:textColor="@color/white">-->
+<!--        </Spinner>-->
+
 
         <EditText
-            android:id="@+id/IDnumberET"
+            android:id="@+id/passwordET"
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@drawable/edit_text_back_ground"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:gravity="center"
-            android:hint="#919 Number"
-            android:inputType="number"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/rolesSP"
-            android:layout_width="330dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="@drawable/edit_text_back_ground"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_margin="5dp"
-            android:textColor="@color/white">
-        </Spinner>
-
-        <EditText
-            android:id="@+id/usernameRegisterET"
-            android:layout_width="330dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/edit_text_back_ground"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="User Name"
-            android:inputType="text"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/passwordRegisterET"
-            android:layout_width="330dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/edit_text_back_ground"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:gravity="center"
+            android:paddingLeft="15dp"
             android:hint="Password"
             android:inputType="textPassword"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textSize="20dp"/>
 
         <View
             android:layout_width="330dp"
@@ -111,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Already registered! Login me."
+            android:text="Already registered! Login here."
             android:textColor="@color/black"
             android:textSize="16dp" />
 
