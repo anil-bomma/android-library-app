@@ -14,13 +14,21 @@
         android:gravity="top"
         android:orientation="vertical">
 
+
+        <ImageView
+            android:layout_width="330dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+
         <TextView
             android:id="@+id/loginTV"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="30dp"
             android:text=" 4 digit verification Code is sent to your mail ID"
             android:textStyle="bold"
             android:textColor="@color/darkSeaGreen"

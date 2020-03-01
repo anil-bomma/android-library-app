@@ -12,6 +12,12 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="330dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/logo" />
+
         <EditText
             android:id="@+id/firstnameET"
             android:layout_width="330dp"
