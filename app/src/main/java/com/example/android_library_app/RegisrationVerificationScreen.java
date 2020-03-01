@@ -78,6 +78,7 @@ public class RegisrationVerificationScreen extends AppCompatActivity {
 
                     Intent intent = new Intent(RegisrationVerificationScreen.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     // stay in the same activity
                     Toast.makeText(RegisrationVerificationScreen.this, "Invalid verification code", Toast.LENGTH_LONG).show();

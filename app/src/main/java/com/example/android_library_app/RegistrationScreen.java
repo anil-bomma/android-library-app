@@ -119,6 +119,7 @@ public class RegistrationScreen extends AppCompatActivity {
                     registrationScreenIntent.putExtra("password", password);
                     registrationScreenIntent.putExtra("vCode", vCode);
                     startActivity(registrationScreenIntent);
+                    finish();
 
                 }
             }
