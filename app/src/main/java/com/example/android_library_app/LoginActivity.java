@@ -24,7 +24,8 @@ public class LoginActivity extends AppCompatActivity {
         registerTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegistrationScreen.class);
+                Intent intent = new Intent(LoginActivity.this,RegistrationScreen.
+                        class);
                 startActivity(intent);
             }
         });
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     // if user not authorized stay in this activity only (don't call intent logic)
     public void authenticateUsernamePassword(View v) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("role", "admin");
+        intent.putExtra("role", "user");
         intent.putExtra("userId", "1234");
         startActivity(intent);
         finish();
