@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/edit_text_back_ground"
-        android:text="List all Buttons"
+        android:text="List all Books"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 
