@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:background="@color/lightGreen"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Light">
+
+    <ImageView
+        android:id="@+id/nav_header_img"
+        android:layout_width="91dp"
+        android:layout_height="90dp"
+        android:src="@drawable/user_default_logo" />
+
+    <TextView
+        android:id="@+id/nav_header_h1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Northwest Missouri"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textFontWeight="800" />
+
+    <TextView
+        android:id="@+id/nav_header_h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Welcome to B. D. Owens Library"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textFontWeight="500" />
+
+
+</LinearLayout>
