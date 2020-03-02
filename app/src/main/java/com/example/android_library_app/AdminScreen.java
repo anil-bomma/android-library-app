@@ -72,7 +72,7 @@ public class AdminScreen extends AppCompatActivity {
         });
 
         admin_settingsBTN = findViewById(R.id.admin_settingsBTN);
-        admin_addOrRemoveDeptBTN.setOnClickListener(new View.OnClickListener() {
+        admin_settingsBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminScreen.this,Settings.class);
