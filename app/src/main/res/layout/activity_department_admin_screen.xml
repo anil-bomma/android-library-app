@@ -6,15 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".DepartmentAdminScreen">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back_ground"
+        android:gravity="center"
+        android:orientation="vertical">
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/deptAdmin_headingTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Department Admin Screen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="italic|bold"
+        android:text="Department Admin Screen"/>
+
+        <Button
+            android:id="@+id/deptAdmin_listBTN"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_back_ground"
+            android:text="List all Books"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/deptAdmin_addBookBTN"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_back_ground"
+            android:text="Add Book"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/deptAdmin_profileBTN"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_back_ground"
+            android:text="User Profile"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/deptAdmin_settingsBTN"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_back_ground"
+            android:text="Settings"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
