@@ -24,5 +24,32 @@ public class UserScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        user_profileBTN = findViewById(R.id.user_profileBTN);
+        user_profileBTN.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(UserScreen.this, UserProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        user_settingsBTN = findViewById(R.id.user_settingsBTN);
+        user_settingsBTN.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(UserScreen.this, Settings.class);
+                startActivity(intent);
+            }
+        });
+
+        user_borrowBooksBTN = findViewById(R.id.user_borrowBooksBTN);
+        user_borrowBooksBTN.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View v){
+                Intent intent = new Intent(UserScreen.this, BooksBorrowed.class);
+                startActivity(intent);
+            }
+        });
     }
 }
