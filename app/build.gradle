@@ -32,4 +32,5 @@ dependencies {
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
