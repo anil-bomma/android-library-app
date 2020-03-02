@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class UserScreen extends AppCompatActivity {
 
-    Button user_listBTN,user_profileBTN,user_settingsBTN,user_borrowBooksBTN;
+    Button user_listBTN, user_profileBTN, user_settingsBTN, user_borrowBooksBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
