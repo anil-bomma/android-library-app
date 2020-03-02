@@ -63,16 +63,40 @@
             android:background="@color/white"/>
 
         <Button
-            android:id="@+id/loginBTN"
+            android:id="@+id/loginUserBTN"
             android:layout_width="330dp"
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:onClick="authenticateUsernamePassword"
+            android:onClick="authenticateUser"
             android:layout_margin="10dp"
             android:textColor="@color/white"
             android:background="@drawable/button_back_ground"
-            android:text="Login" />
+            android:text="Login as End User" />
+
+        <Button
+            android:id="@+id/loginAdminBTN"
+            android:layout_width="330dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:onClick="authenticateAdmin"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_back_ground"
+            android:text="Login as admin" />
+
+        <Button
+            android:id="@+id/loginDeptAdminBTN"
+            android:layout_width="330dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:onClick="authenticateDeptAdmin"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_back_ground"
+            android:text="Login as Department Admin" />
 
         <TextView
             android:id="@+id/registerTV"
