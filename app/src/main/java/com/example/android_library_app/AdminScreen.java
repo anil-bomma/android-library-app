@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -58,10 +59,10 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
                         new SearchBookFragment()).commit();
                 break;
             case R.id.nav_login:
-                Toast.makeText(this, "login called", Toast.LENGTH_SHORT).show();
+                handleLoginIntent();
                 break;
             case R.id.nav_register:
-                Toast.makeText(this, "register called", Toast.LENGTH_SHORT).show();
+                handleRegisterIntent();
                 break;
             case R.id.nav_help:
                 Toast.makeText(this, "help called", Toast.LENGTH_SHORT).show();
@@ -73,6 +74,18 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // login intent will be executed
+    public void handleLoginIntent() {
+        Intent loginIntent = new Intent(AdminScreen.this, LoginActivity.class);
+        startActivity(loginIntent);
+    }
+
+    // register intent will be executed
+    public void handleRegisterIntent() {
+        Intent registerIntent = new Intent(AdminScreen.this, RegistrationScreen.class);
+        startActivity(registerIntent);
     }
 
     @Override

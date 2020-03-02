@@ -33,12 +33,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
     // will triggered back to main activity with login is success
     // if user not authorized stay in this activity only (don't call intent logic)
     public void authenticateUsernamePassword(View v) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("role", "user");
+        intent.putExtra("role", "admin");
         intent.putExtra("userId", "1234");
         startActivity(intent);
         finish();
