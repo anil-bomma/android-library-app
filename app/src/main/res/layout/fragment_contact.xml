@@ -12,29 +12,37 @@
         android:layout_height="70dp"
         android:src="@drawable/main_logo" />
 
-    <TextView
-        android:id="@+id/fragment_nav_email"
+    <EditText
+        android:id="@+id/emailIdET"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:padding="15dp"
-        android:textAlignment="textStart"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/light_black"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Email id: libraryowens@gmail.com"
-         />
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_mail"
+        android:background="@color/light_gray"
+        android:paddingLeft="15dp"
+        android:drawablePadding="10dp"
+        android:textColor="@color/white"
+        android:enabled="false"
+        android:textSize="25dp"
+        android:text="libraryowens@gmail.com"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/fragment_nav_phoneNumber"
+    <EditText
+        android:id="@+id/mobiledET"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:padding="15dp"
-        android:textAlignment="textStart"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/light_black"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Phone Number: 660-5280-951"
-        />
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_call_black_24dp"
+        android:background="@color/light_gray"
+        android:paddingLeft="15dp"
+        android:drawablePadding="10dp"
+        android:textColor="@color/white"
+        android:enabled="false"
+        android:textSize="25dp"
+        android:text="+1 (660) 215-1234"
+        android:textStyle="bold" />
+
+
 </LinearLayout>
