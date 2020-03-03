@@ -69,7 +69,8 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
                         new HelpMenuFragment()).commit();
                 break;
             case R.id.nav_contact_us:
-                Toast.makeText(this, "contact us called", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ContactMenuFragment()).commit();
                 break;
         }
 
