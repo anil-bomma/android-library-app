@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="60dp"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:src="@drawable/main_logo" />
+
+    <TextView
+        android:id="@+id/fragment_nav_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="15dp"
+        android:textAlignment="textStart"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/light_black"
+        android:fontFamily="sans-serif-condensed"
+        android:text="* This is basically a library application.
+        \n* The main functionality of this application is to ensure that the library facilities are readily available.
+        \n* The screen which you initially view gives you the brief description of all the books.
+        \n* You can search for a book by typing the keyword in relation with that book.
+        \n*When you type a keyword in the search book section,the books related to that keyword are displayed.
+        \n* If you are interested in borrowing a book, it's compulsory that you login.\n
+And if you are new user then you must register" />
+</LinearLayout>

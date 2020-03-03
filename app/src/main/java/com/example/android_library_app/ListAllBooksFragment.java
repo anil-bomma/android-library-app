@@ -112,16 +112,6 @@ class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 }
 
 
-//public class ListAllBooksFragment extends Fragment {
-//
-//    @Nullable
-//    @Override
-//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return inflater.inflate(R.layout.fragment_list_all_books, container, false);
-//    }
-//}
-
-
 public class ListAllBooksFragment extends Fragment {
 
     // recycler view.
