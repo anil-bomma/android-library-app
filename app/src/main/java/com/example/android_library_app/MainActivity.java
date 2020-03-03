@@ -10,8 +10,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String userRole;
-    private String userId;
+    public static boolean loginStatus = false;
+    public static String userId;
+    public static String userRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("mainActivity", "------admin user------");
                 Intent adminScreen = new Intent(MainActivity.this, AdminScreen.class);
                 adminScreen.putExtra("userId", userId);
+                adminScreen.putExtra("userRole", userRole);
                 startActivity(adminScreen);
                 finish();
                 break;
@@ -59,9 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 ).show();
         }
 
-
         TextView homeId = findViewById(R.id.homeId);
         homeId.setText(("userRole: " + userRole));
     }
-    
+
 }

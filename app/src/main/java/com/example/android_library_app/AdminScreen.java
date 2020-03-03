@@ -9,19 +9,33 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    public static Menu nav_menu;
+    UserRoleBasedNavigation navSetting = new UserRoleBasedNavigation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_screen);
+
+        NavigationView nav_view = findViewById(R.id.nav_view);
+        nav_menu = nav_view.getMenu();
+
+        if (MainActivity.loginStatus) {
+            Intent loginIntent = getIntent();
+            String userId = loginIntent.getStringExtra("userId");
+            String userRole = loginIntent.getStringExtra("userRole");
+            navSetting.setNavigation(AdminScreen.this, userRole, userId);
+        } else {
+            navSetting.setNavigation(AdminScreen.this, "", "");
+        }
 
         // nav-bar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -47,7 +61,6 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        System.out.println("-----menuItem.getItemId()------" + menuItem.getItemId());
         switch (menuItem.getItemId()) {
             case R.id.nav_list_all_books:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -60,6 +73,9 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
                 break;
             case R.id.nav_login:
                 handleLoginIntent();
+                break;
+            case R.id.nav_logout:
+                handleLogoutIntent();
                 break;
             case R.id.nav_register:
                 handleRegisterIntent();
@@ -83,6 +99,13 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
         Intent loginIntent = new Intent(AdminScreen.this, LoginActivity.class);
         startActivity(loginIntent);
     }
+
+    // logout intent will be executed
+    public void handleLogoutIntent() {
+        MainActivity.loginStatus = false;
+        navSetting.setNavigation(AdminScreen.this, "", "");
+    }
+
 
     // register intent will be executed
     public void handleRegisterIntent() {
