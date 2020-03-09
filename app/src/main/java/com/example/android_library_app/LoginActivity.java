@@ -70,9 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                             LoginActivity.this,
                             "Logged in Successfully",
                             Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("role", "admin");
-                    intent.putExtra("userId", "1234");
+                    intent.putExtra("userId", fAuth.getUid());
                     MainActivity.loginStatus = true;
                     startActivity(intent);
                     finish();

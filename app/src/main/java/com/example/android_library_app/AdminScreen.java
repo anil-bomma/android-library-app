@@ -32,6 +32,7 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
             Intent loginIntent = getIntent();
             String userId = loginIntent.getStringExtra("userId");
             String userRole = loginIntent.getStringExtra("userRole");
+
             navSetting.setNavigation(AdminScreen.this, userRole, userId);
         } else {
             navSetting.setNavigation(AdminScreen.this, "", "");

@@ -20,9 +20,9 @@ public class UserRoleBasedNavigation {
 
             setNavigationForDepartmentAdmin(context, userId);
 
-        } else if (role.equalsIgnoreCase("user")) {
+        } else if (role.equalsIgnoreCase("student")) {
 
-            setNavigationForUser(context, userId);
+            setNavigationForStudent(context, userId);
 
         } else {
 
@@ -59,8 +59,8 @@ public class UserRoleBasedNavigation {
         nav_menu.findItem(R.id.nav_setting).setVisible(true);
     }
 
-    // navigation bar for setting the user
-    public void setNavigationForUser(Context context, String userId) {
+    // navigation bar for setting the student
+    public void setNavigationForStudent(Context context, String userId) {
         nav_menu.findItem(R.id.nav_add_dept_admin).setVisible(false);
         nav_menu.findItem(R.id.nav_list_all_dept_admin).setVisible(false);
         nav_menu.findItem(R.id.nav_add_book).setVisible(false);
