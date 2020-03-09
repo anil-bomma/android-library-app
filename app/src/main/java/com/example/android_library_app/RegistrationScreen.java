@@ -1,5 +1,6 @@
 package com.example.android_library_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -15,6 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.SignInMethodQueryResult;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +31,9 @@ public class RegistrationScreen extends AppCompatActivity {
     Button registerBTN;
     TextView loginTV;
     EditText firstnameET, lastnameET, studentIdET, emailIdET, passwordET;
+
+    FirebaseAuth fAuth;
+
 
     //    Spinner rolesSP;
     @Override
@@ -37,6 +46,8 @@ public class RegistrationScreen extends AppCompatActivity {
         studentIdET = findViewById(R.id.studentIdET);
         emailIdET = findViewById(R.id.emailIdET);
         passwordET = findViewById(R.id.passwordET);
+
+        fAuth = FirebaseAuth.getInstance();
 
 
 //        // Code for spinner for role attribute
@@ -93,34 +104,9 @@ public class RegistrationScreen extends AppCompatActivity {
                 if (!firstname.isEmpty() && !lastname.isEmpty() && !studentId.isEmpty() &&
                         !emailId.isEmpty() && !password.isEmpty()) {
 
-                    // build subject and message for login
                     Random random = new Random();
                     String vCode = String.format("%04d", random.nextInt(10000));
-                    String subject = "B.D. Owens Library, Registration verification code";
-                    String message = String.format(
-                            "Hello %s %s, here is the verification code for registration: %s" +
-                                    "%n%nThank you, %nTeam Library",
-                            firstname, lastname, vCode);
 
-                    // sending verification code to user and sending to next intent also
-                    GmailServer mailServer = new GmailServer(
-                            RegistrationScreen.this,
-                            emailId,
-                            subject,
-                            message
-                    );
-
-                    mailServer.execute();
-//                    try {
-//                        TimeUnit.SECONDS.sleep(5);
-//                    } catch (InterruptedException e) {
-//                        System.out.println("error while sending error: " + e);
-//                        Toast.makeText(
-//                                RegistrationScreen.this,
-//                                "Error while sending message",
-//                                Toast.LENGTH_SHORT
-//                        ).show();
-//                    }
 
                     Intent registrationScreenIntent = new Intent(
                             RegistrationScreen.this,
@@ -132,8 +118,8 @@ public class RegistrationScreen extends AppCompatActivity {
                     registrationScreenIntent.putExtra("emailId", emailId);
                     registrationScreenIntent.putExtra("password", password);
                     registrationScreenIntent.putExtra("vCode", vCode);
-                    startActivity(registrationScreenIntent);
-                    finish();
+
+                    sendVerificationCode(firstname, lastname, emailId, vCode, registrationScreenIntent);
 
                 }
             }
@@ -149,6 +135,51 @@ public class RegistrationScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void sendVerificationCode(
+            final String firstname, final String lastname,
+            final String emailId, final String vCode, final Intent registerVerifyIntent) {
+
+        // check mail already registered or not
+        fAuth.fetchSignInMethodsForEmail(emailId)
+                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                        // check login ways
+                        boolean check = task.getResult().getSignInMethods().isEmpty();
+
+                        if (check) {
+                            // build subject and message for login
+                            String subject = "B.D. Owens Library, Registration verification code";
+                            String message = String.format(
+                                    "Hello %s %s, here is the verification code for registration: %s" +
+                                            "%n%nThank you, %nTeam Library",
+                                    firstname, lastname, vCode);
+
+                            // sending verification code to user and sending to next intent also
+                            GmailServer mailServer = new GmailServer(
+                                    RegistrationScreen.this,
+                                    emailId, subject, message);
+                            mailServer.execute();
+
+                            try {
+                                TimeUnit.SECONDS.sleep(5);
+                            } catch (InterruptedException e) {
+                                System.out.println("error while sending error: " + e);
+                                Toast.makeText(
+                                        RegistrationScreen.this,
+                                        "Error while sending message",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+                            }
+                            startActivity(registerVerifyIntent);
+                            finish();
+                        } else {
+                            emailIdET.setError("Email Id already register.");
+                        }
+                    }
+                });
     }
 
 

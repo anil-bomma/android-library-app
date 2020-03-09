@@ -70,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                             LoginActivity.this,
                             "Logged in Successfully",
                             Toast.LENGTH_SHORT).show();
-                    System.out.println("-----login sucess------");
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("role", "admin");
                     intent.putExtra("userId", "1234");
@@ -82,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                             LoginActivity.this,
                             "Error ! " + task.getException().getMessage(),
                             Toast.LENGTH_LONG).show();
-                    System.out.println("-----login failed------");
                 }
             }
         });
