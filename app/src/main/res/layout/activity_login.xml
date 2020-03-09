@@ -68,7 +68,6 @@
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:onClick="authenticateUsernamePassword"
             android:layout_margin="10dp"
             android:textColor="@color/white"
             android:background="@drawable/button_back_ground"
