@@ -12,9 +12,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +33,7 @@ public class RegisrationVerificationScreen extends AppCompatActivity {
     private static String vCode;
 
     private FirebaseAuth fAuth;
+    private FirebaseFirestore db;
 
     String userID;
 
@@ -54,6 +59,7 @@ public class RegisrationVerificationScreen extends AppCompatActivity {
         verifyET = findViewById(R.id.verifyET);
 
         fAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         verifyBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +76,7 @@ public class RegisrationVerificationScreen extends AppCompatActivity {
                 if (userVcode.equals(vCode)) {
                     // save in database logic here
 
-                    // register the user in firebase
+                    // register the user in fire base
                     fAuth.createUserWithEmailAndPassword(emailId, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -85,6 +91,32 @@ public class RegisrationVerificationScreen extends AppCompatActivity {
 
                                         // sending mail to user
                                         sendMailToUser();
+
+                                        // save in db
+                                        userID = fAuth.getCurrentUser().getUid();
+                                        DocumentReference documentReference = db.collection("users").document(userID);
+                                        Map<String, Object> user = new HashMap<>();
+                                        user.put("firstname", firstname);
+                                        user.put("lastname", lastname);
+                                        user.put("studentId", studentId);
+                                        user.put("emailId", emailId);
+                                        user.put("password", password);
+                                        user.put("role", "student");
+
+                                        // added user-info in database with user id
+                                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("db", "onSuccess: user Profile is created for "+ userID);
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d("db", "onFailure: " + e.toString());
+                                            }
+                                        });
+
+
                                         // sending to login intent
                                         Intent intent = new Intent(
                                                 RegisrationVerificationScreen.this,
