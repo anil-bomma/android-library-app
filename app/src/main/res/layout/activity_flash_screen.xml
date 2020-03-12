@@ -12,61 +12,39 @@
     android:layout_marginTop="60dp"
     android:background="@android:color/white"
     android:orientation="vertical">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:src="@drawable/main_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        android:src="@drawable/main_logo" />
 
-    <TextView
-        android:id="@+id/headingTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Welcome BearCats!!!!!Welcome to the Library App"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+    <EditText
+        android:id="@+id/welcomeET"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:enabled="false"
+        android:text="Welcome Bearcats"
         android:textColor="@color/colorPrimary"
+        android:gravity="center"
         android:textFontWeight="900"
         android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324" />
+        android:fontFamily="@string/appbar_scrolling_view_behavior"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/user_default_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.644" />
+        android:src="@drawable/user_default_logo" />
 
     <EditText
         android:id="@+id/flashET"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:enabled="false"
-        android:gravity="center"
         android:text="B. D. Owens Library"
         android:textColor="@color/colorPrimary"
+        android:gravity="center"
         android:textFontWeight="900"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        android:textSize="30dp"/>
 </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
