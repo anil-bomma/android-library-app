@@ -32,7 +32,7 @@ public class UserRoleBasedNavigation {
             nav_menu.findItem(R.id.nav_logout).setVisible(false);
             nav_menu.findItem(R.id.nav_add_dept_admin).setVisible(false);
             nav_menu.findItem(R.id.nav_list_all_dept_admin).setVisible(false);
-            nav_menu.findItem(R.id.nav_add_book).setVisible(true);
+            nav_menu.findItem(R.id.nav_add_book).setVisible(false);
             nav_menu.findItem(R.id.nav_setting).setVisible(false);
         }
     }
