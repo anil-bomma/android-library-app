@@ -13,12 +13,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     public static Menu nav_menu;
     UserRoleBasedNavigation navSetting = new UserRoleBasedNavigation();
+
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
             Intent loginIntent = getIntent();
             String userId = loginIntent.getStringExtra("userId");
             String userRole = loginIntent.getStringExtra("userRole");
-
+            fAuth = FirebaseAuth.getInstance();
             navSetting.setNavigation(AdminScreen.this, userRole, userId);
         } else {
             navSetting.setNavigation(AdminScreen.this, "", "");
@@ -89,6 +92,10 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ContactMenuFragment()).commit();
                 break;
+            case R.id.nav_add_book:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AddBookFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -104,6 +111,7 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
     // logout intent will be executed
     public void handleLogoutIntent() {
         MainActivity.loginStatus = false;
+        fAuth.signOut();
         navSetting.setNavigation(AdminScreen.this, "", "");
     }
 
