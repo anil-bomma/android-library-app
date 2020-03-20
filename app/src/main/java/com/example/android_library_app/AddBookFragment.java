@@ -117,18 +117,16 @@ public class AddBookFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                System.out.println("----------document success----------");
+                                boolean bookExist = false;
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    System.out.println("----------document----------"+document);
-                                    if (document.exists()) {
-                                        titleET.setError("book already exist with the same name");
-                                    } else {
-                                        Log.w("addBookFragment", "-----calling save function");
-                                        saveBook(title, author, language, genre, publisher, available, description);
-                                    }
+                                    bookExist = true;
+                                }
+                                if (bookExist) {
+                                    titleET.setError("book already exist with the same name");
+                                } else {
+                                    saveBook(title, author, language, genre, publisher, available, description);
                                 }
                             } else {
-                                System.out.println("----------document fail----------");
                                 Log.d("addBookFragment", "Error getting documents: ", task.getException());
                             }
                         }
@@ -151,8 +149,6 @@ public class AddBookFragment extends Fragment {
             book.put("description", description);
             book.put("available", available);
 
-            System.out.println("------book: "+book);
-
             // Add a new document with a generated ID
             db.collection("books")
                     .add(book)
@@ -160,6 +156,13 @@ public class AddBookFragment extends Fragment {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d("addBookFragment", "DocumentSnapshot added with ID: " + documentReference.getId());
+                            titleET.setText("");
+                            authorET.setText("");
+                            languageET.setText("");
+                            genreET.setText("");
+                            publisherET.setText("");
+//                            descriptionET.setText("");
+//                            availableET.setText("");
                             Toast.makeText(
                                     AddBookFragment.super.getContext(),
                                     "Book added successfully",
