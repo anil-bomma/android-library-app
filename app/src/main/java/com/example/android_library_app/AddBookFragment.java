@@ -57,18 +57,18 @@ public class AddBookFragment extends Fragment {
                     languageET = fragmentAddBookView.findViewById(R.id.languageET);
                     genreET = fragmentAddBookView.findViewById(R.id.genreET);
                     publisherET = fragmentAddBookView.findViewById(R.id.publisherET);
-//                descriptionET = fragmentAddBookView.findViewById(R.id.descriptionET);
-//                availableET = fragmentAddBookView.findViewById(R.id.availableET);
+                    descriptionET = fragmentAddBookView.findViewById(R.id.descriptionET);
+                    availableET = fragmentAddBookView.findViewById(R.id.availableET);
 
                     String title = titleET.getText().toString().trim();
                     String author = authorET.getText().toString().trim();
                     String language = languageET.getText().toString().trim();
                     String genre = genreET.getText().toString().trim();
                     String publisher = publisherET.getText().toString().trim();
-//                String description = descriptionET.getText().toString().trim();
-//                String available = availableET.getText().toString().trim();
-                    String description = "description";
-                    String available = "5";
+                    String description = descriptionET.getText().toString().trim();
+                    String available = availableET.getText().toString().trim();
+//                    String description = "description";
+//                    String available = "5";
 
                     if (description.isEmpty()) {
                         description = String.format("%s by %s", title, author);
@@ -161,8 +161,8 @@ public class AddBookFragment extends Fragment {
                             languageET.setText("");
                             genreET.setText("");
                             publisherET.setText("");
-//                            descriptionET.setText("");
-//                            availableET.setText("");
+                            descriptionET.setText("");
+                            availableET.setText("");
                             Toast.makeText(
                                     AddBookFragment.super.getContext(),
                                     "Book added successfully",
