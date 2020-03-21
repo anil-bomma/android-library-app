@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter book name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:inputType="textPersonName"/>
 
         <TextView
@@ -76,6 +77,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter author name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:inputType="textPersonName"/>
 
         <TextView
@@ -91,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:hint="Enter language of book"
             android:inputType="textPersonName"/>
 
@@ -108,6 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:hint="Enter genre of the book"
             android:inputType="textPersonName"/>
 
@@ -126,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:hint="Enter publication of book"
             android:inputType="textPersonName"/>
 
@@ -141,7 +146,8 @@
             android:id="@+id/descriptionET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter description of the book"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:hint="Enter description of book"
             android:inputType="textPersonName" />
 
         <TextView
@@ -156,7 +162,8 @@
             android:id="@+id/availableET"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Enter number of books available"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:hint="Enter no. of books available"
             android:inputType="textPersonName" />
 
         <Button
@@ -167,7 +174,6 @@
             android:background="@drawable/button_back_ground"
             android:text="Add Book"
             android:textStyle="bold" />
-
 
     </LinearLayout>
 
