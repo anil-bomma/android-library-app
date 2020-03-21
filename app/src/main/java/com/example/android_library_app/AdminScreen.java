@@ -96,6 +96,11 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AddBookFragment()).commit();
                 break;
+            case R.id.nav_add_dept_admin:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AddDepartmentAdminFragment()).commit();
+                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);
