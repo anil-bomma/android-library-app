@@ -7,41 +7,64 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-public class AddDepartmentAdminFragment extends Fragment {
+public class AddDepartmentAdminFragment extends Fragment
+//        implements SearchPersonFragment.SearchListener
+    {
 
-    Button add_dpt_adminBTN;
-    EditText dpt_admin_nameET, dpt_admin_919ET, assigned_dptET, dpt_admin_emailET, dpt_admin_mobileET;
+    private SearchPersonFragment searchPersonFragment;
+    Button find_personBTN;
+    EditText  dpt_admin_919ET;
+    View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_add_dpt_admin, container, false);
+         view= inflater.inflate(R.layout.fragment_add_dpt_admin, container, false);
 
-        add_dpt_adminBTN = view.findViewById(R.id.add_dpt_adminBTN);
-        add_dpt_adminBTN.setOnClickListener(new View.OnClickListener() {
+         // fragment code.
+        // first time only code.
+        if (savedInstanceState != null) {
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            searchPersonFragment = (SearchPersonFragment) manager.findFragmentByTag("searchFR");
+            //return;
+        }
+
+        searchPersonFragment = new SearchPersonFragment();
+
+        // transaction object.
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.find_person_containerFL, searchPersonFragment, "searchFR");
+        transaction.hide(searchPersonFragment);
+        transaction.commit();
+
+
+
+        find_personBTN = view.findViewById(R.id.find_personBTN);
+        find_personBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
-                    dpt_admin_nameET = view.findViewById(R.id.dpt_admin_nameET);
+
                     dpt_admin_919ET = view.findViewById(R.id.dpt_admin_919ET);
-                    assigned_dptET = view.findViewById(R.id.assigned_dptET);
-                    dpt_admin_emailET = view.findViewById(R.id.dpt_admin_emailET);
-                    dpt_admin_mobileET = view.findViewById(R.id.dpt_admin_mobileET);
-
-                    String dpt_admin_name = dpt_admin_nameET.getText().toString().trim();
                     String dpt_admin_919 = dpt_admin_919ET.getText().toString().trim();
-                    String assigned_dpt = assigned_dptET.getText().toString().trim();
-                    String dpt_admin_email = dpt_admin_emailET.getText().toString().trim();
-                    String dpt_admin_mobile = dpt_admin_mobileET.getText().toString().trim();
+                    validateDptAdmin(dpt_admin_919);
 
 
-                    validateDptAdmin(dpt_admin_name,dpt_admin_919,assigned_dpt,dpt_admin_email,dpt_admin_mobile);
+                    // temporary code.
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.show(searchPersonFragment);
+                    transaction.commit();
+
                 }catch(Exception e) {
                     Log.d("Error occured"," is "+e);
+                    Toast.makeText(getActivity(), "Enter proper 919 number", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -49,24 +72,14 @@ public class AddDepartmentAdminFragment extends Fragment {
         return view;
     }
 
-    private void validateDptAdmin(String dpt_admin_name, String dpt_admin_919,
-                                  String assigned_dpt, String dpt_admin_email,
-                                  String dpt_admin_mobile) {
-        if(dpt_admin_name.isEmpty()) {
-            dpt_admin_nameET.setError("Enter the name of the person");
-        }
+    private void validateDptAdmin(String dpt_admin_919) {
         if(dpt_admin_919.isEmpty()) {
             dpt_admin_919ET.setError("Enter the 919 number");
         }
-        if(assigned_dpt.isEmpty()) {
-            assigned_dptET.setError("Enter the department name to be assigned");
-        }
-        if(dpt_admin_email.isEmpty()) {
-            dpt_admin_emailET.setError("Enter the mail ID");
-        }
-        if(dpt_admin_mobile.isEmpty()) {
-            dpt_admin_mobileET.setError("Enter the contact number");
-        }
     }
 
+//    @Override
+//    public void addPressed() {
+//        Toast.makeText(getActivity(), "Added the user as department admin", Toast.LENGTH_SHORT).show();
+//    }
 }
