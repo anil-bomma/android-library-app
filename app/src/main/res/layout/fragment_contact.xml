@@ -12,8 +12,8 @@
         android:layout_height="70dp"
         android:src="@drawable/main_logo" />
 
-    <EditText
-        android:id="@+id/emailIdET"
+    <Button
+        android:id="@+id/emailIDBTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="10dp"
@@ -23,13 +23,12 @@
         android:paddingLeft="15dp"
         android:drawablePadding="10dp"
         android:textColor="@color/white"
-        android:enabled="false"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:text="libraryowens@gmail.com"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/mobiledET"
+    <Button
+        android:id="@+id/mobileBTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="10dp"
@@ -39,9 +38,8 @@
         android:paddingLeft="15dp"
         android:drawablePadding="10dp"
         android:textColor="@color/white"
-        android:enabled="false"
         android:textSize="25dp"
-        android:text="+1 (660) 215-1234"
+        android:text="+1 (660) 528-0951"
         android:textStyle="bold" />
 
 

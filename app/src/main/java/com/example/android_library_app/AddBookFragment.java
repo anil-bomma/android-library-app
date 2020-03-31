@@ -5,8 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +33,8 @@ import java.util.Map;
 public class AddBookFragment extends Fragment {
 
     Button addBookBTN;
-    EditText titleET, authorET, languageET, genreET, publisherET, descriptionET,availableET;
+    EditText titleET, authorET, languageET, genreET, publisherET, descriptionET,availableET,sectionIDET;
+    //Spinner rackIDSP;
     private FirebaseFirestore db;
 
 
@@ -38,6 +42,7 @@ public class AddBookFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View fragmentAddBookView = inflater.inflate(R.layout.fragment_add_book, container, false);
+
 
         db = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
@@ -57,25 +62,34 @@ public class AddBookFragment extends Fragment {
                     languageET = fragmentAddBookView.findViewById(R.id.languageET);
                     genreET = fragmentAddBookView.findViewById(R.id.genreET);
                     publisherET = fragmentAddBookView.findViewById(R.id.publisherET);
-//                descriptionET = fragmentAddBookView.findViewById(R.id.descriptionET);
-//                availableET = fragmentAddBookView.findViewById(R.id.availableET);
+                    descriptionET = fragmentAddBookView.findViewById(R.id.descriptionET);
+                    availableET = fragmentAddBookView.findViewById(R.id.availableET);
+                   // rackIDSP= fragmentAddBookView.findViewById(R.id.rackIDSP);
+                    sectionIDET=fragmentAddBookView.findViewById(R.id.sectionIDET);
 
                     String title = titleET.getText().toString().trim();
                     String author = authorET.getText().toString().trim();
                     String language = languageET.getText().toString().trim();
                     String genre = genreET.getText().toString().trim();
                     String publisher = publisherET.getText().toString().trim();
-//                String description = descriptionET.getText().toString().trim();
-//                String available = availableET.getText().toString().trim();
-                    String description = "description";
-                    String available = "5";
+                    String description = descriptionET.getText().toString().trim();
+                    String available = availableET.getText().toString().trim();
+                    String sectionID = sectionIDET.getText().toString().trim();
+
+//                    String description = "description";
+//                    String available = "5";
 
                     if (description.isEmpty()) {
                         description = String.format("%s by %s", title, author);
                     }
 
+                    //Assigning the sectionID to 1 if the text-field is empty
+                    if(sectionID.isEmpty()){
+                        sectionID="1";
+                    }
+
                     // validate and save book in db
-                    validateBook(title, author, language, genre, publisher, available, description);
+                    validateBook(title, author, language, genre, publisher, available, description, sectionID);
 
                 } catch (Exception e) {
                     System.out.println("error: "+e);
@@ -87,7 +101,7 @@ public class AddBookFragment extends Fragment {
     }
 
     public void validateBook(final String title, final String author, final String language, final String genre,
-                             final String publisher, final String available, final String description) {
+                             final String publisher, final String available, final String description, final String sectionID) {
 
         if (title.isEmpty()) {
             titleET.setError("please enter the title");
@@ -105,8 +119,10 @@ public class AddBookFragment extends Fragment {
             publisherET.setError("please enter the publisher name");
         }
         if (available.isEmpty()) {
-            publisherET.setError("please enter the total book count");
+            availableET.setError("please enter the total book count");
         }
+
+
 
         try {
             // check book already present in db or not
@@ -124,7 +140,7 @@ public class AddBookFragment extends Fragment {
                                 if (bookExist) {
                                     titleET.setError("book already exist with the same name");
                                 } else {
-                                    saveBook(title, author, language, genre, publisher, available, description);
+                                    saveBook(title, author, language, genre, publisher, available, description, sectionID);
                                 }
                             } else {
                                 Log.d("addBookFragment", "Error getting documents: ", task.getException());
@@ -137,7 +153,7 @@ public class AddBookFragment extends Fragment {
     }
 
     public void saveBook(String title, String author, String language, String genre,
-                         String publisher, String available, String description) {
+                         String publisher, String available, String description, String sectionID) {
         try {
             // Create a new user with a first and last name
             Map<String, Object> book = new HashMap<>();
@@ -148,6 +164,7 @@ public class AddBookFragment extends Fragment {
             book.put("publisher", publisher);
             book.put("description", description);
             book.put("available", available);
+            book.put("sectionID",sectionID);
 
             // Add a new document with a generated ID
             db.collection("books")
@@ -161,8 +178,9 @@ public class AddBookFragment extends Fragment {
                             languageET.setText("");
                             genreET.setText("");
                             publisherET.setText("");
-//                            descriptionET.setText("");
-//                            availableET.setText("");
+                            descriptionET.setText("");
+                            availableET.setText("");
+                            sectionIDET.setText("");
                             Toast.makeText(
                                     AddBookFragment.super.getContext(),
                                     "Book added successfully",
