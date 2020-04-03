@@ -19,7 +19,7 @@ import java.util.List;
 import static java.net.Proxy.Type.HTTP;
 
 public class ContactMenuFragment extends Fragment {
-    Button mobileBTN,emailIDBTN;
+    Button mobile1BTN, mobile2BTN, mobile3BTN, mobile4BTN,emailIDBTN;
 
     @Nullable
     @Override
@@ -27,19 +27,43 @@ public class ContactMenuFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
-        mobileBTN=view.findViewById(R.id.mobileBTN);
+        mobile1BTN=view.findViewById(R.id.mobile1BTN);
 
-        mobileBTN.setOnClickListener(new View.OnClickListener() {
+        mobile1BTN.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v){
-                    Uri number = Uri.parse("tel:+16605280951");
-                    Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
-                    startActivity(callIntent);
-        }
+                    buttonPressed(v);
+                }
+        });
+
+        mobile2BTN=view.findViewById(R.id.mobile1BTN);
+
+        mobile2BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                buttonPressed(v);
+            }
+        });
+
+        mobile4BTN=view.findViewById(R.id.mobile1BTN);
+
+        mobile4BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                buttonPressed(v);
+            }
+        });
+
+        mobile3BTN=view.findViewById(R.id.mobile1BTN);
+
+        mobile3BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                buttonPressed(v);
+            }
         });
 
         emailIDBTN=view.findViewById(R.id.emailIDBTN);
-
         emailIDBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,11 +77,33 @@ public class ContactMenuFragment extends Fragment {
                 intent.setType("text/html");
                 intent.setPackage("com.google.android.gm");
                 startActivity(Intent.createChooser(intent, "Send mail"));
-
             }
         });
 
-
     return view;
+    }
+
+    public void buttonPressed(View view) {
+        Button clicked = (Button) view;
+        if(clicked.getId() == R.id.mobile1BTN) {
+            Uri number = Uri.parse("tel:+16605280951");
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            startActivity(callIntent);
+        }
+        else if(clicked.getId() == R.id.mobile2BTN) {
+            Uri number = Uri.parse("tel:+16602198441");
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            startActivity(callIntent);
+        }
+        else if(clicked.getId() == R.id.mobile3BTN) {
+            Uri number = Uri.parse("tel:+16605281069");
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            startActivity(callIntent);
+        }
+        else if(clicked.getId() == R.id.mobile4BTN) {
+            Uri number = Uri.parse("tel:+16605281070");
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            startActivity(callIntent);
+        }
     }
 }
