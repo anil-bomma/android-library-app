@@ -57,6 +57,8 @@ public class AddBookFragment extends Fragment {
             public void onClick(View v) {
                 try {
 
+                    //the below line of code is just for testing
+                    System.out.println("This is just for testing");
                     titleET = fragmentAddBookView.findViewById(R.id.titleET);
                     authorET = fragmentAddBookView.findViewById(R.id.authorET);
                     languageET = fragmentAddBookView.findViewById(R.id.languageET);
