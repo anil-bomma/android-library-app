@@ -23,6 +23,8 @@ public class AddDepartmentAdminFragment extends Fragment
     Button find_personBTN;
     EditText  dpt_admin_919ET;
     View view;
+    boolean count = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,28 +56,30 @@ public class AddDepartmentAdminFragment extends Fragment
 
                     dpt_admin_919ET = view.findViewById(R.id.dpt_admin_919ET);
                     String dpt_admin_919 = dpt_admin_919ET.getText().toString().trim();
-                    validateDptAdmin(dpt_admin_919);
-
-
-                    // temporary code.
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.show(searchPersonFragment);
-                    transaction.commit();
-
+                    if(validateDptAdmin(dpt_admin_919) == false) {
+                        // temporary code.
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.show(searchPersonFragment);
+                        transaction.commit();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Enter  #919", Toast.LENGTH_SHORT).show();
+                    }
                 }catch(Exception e) {
                     Log.d("Error occured"," is "+e);
                     Toast.makeText(getActivity(), "Enter proper 919 number", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         return view;
     }
 
-    private void validateDptAdmin(String dpt_admin_919) {
+    private boolean validateDptAdmin(String dpt_admin_919) {
         if(dpt_admin_919.isEmpty()) {
             dpt_admin_919ET.setError("Enter the 919 number");
+            return true;
         }
+        return false;
     }
 
 //    @Override
