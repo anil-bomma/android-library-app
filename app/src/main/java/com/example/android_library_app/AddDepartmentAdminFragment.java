@@ -79,7 +79,7 @@ public class AddDepartmentAdminFragment extends Fragment
     }
 
 //    @Override
-//    public void addPressed() {
-//        Toast.makeText(getActivity(), "Added the user as department admin", Toast.LENGTH_SHORT).show();
-//    }
+    public void addPressed() {
+        Toast.makeText(getActivity(), "Added the user as department admin", Toast.LENGTH_SHORT).show();
+    }
 }
