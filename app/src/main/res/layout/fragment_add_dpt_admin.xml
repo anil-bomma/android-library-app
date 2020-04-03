@@ -15,33 +15,10 @@
         android:src="@drawable/logo" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="50dp"
-        android:textStyle="bold"
-        android:text="Person Name" />
-
-    <EditText
-        android:id="@+id/dpt_admin_nameET"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:background="@drawable/edit_text_back_ground"
-        android:paddingLeft="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="15dp"
-        android:ems="10"
-        android:hint="Enter the name of the person"
-        android:inputType="textPersonName" />
-
-    <TextView
         android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="50dp"
         android:textStyle="bold"
         android:text="#919 Number" />
@@ -60,77 +37,8 @@
         android:hint="Enter 919 number "
         android:inputType="textPersonName" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="50dp"
-        android:textStyle="bold"
-        android:text="Department Name" />
-
-    <EditText
-        android:id="@+id/assigned_dptET"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:background="@drawable/edit_text_back_ground"
-        android:paddingLeft="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="15dp"
-        android:ems="10"
-        android:hint="Enter depertment name"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="50dp"
-        android:textStyle="bold"
-        android:text="Email ID" />
-
-    <EditText
-        android:id="@+id/dpt_admin_emailET"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:background="@drawable/edit_text_back_ground"
-        android:paddingLeft="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="15dp"
-        android:ems="10"
-        android:hint="Enter EmailID"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="50dp"
-        android:textStyle="bold"
-        android:text="Department Name" />
-
-    <EditText
-        android:id="@+id/dpt_admin_mobileET"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:background="@drawable/edit_text_back_ground"
-        android:paddingLeft="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="15dp"
-        android:ems="10"
-        android:hint="Enter Contact number"
-        android:inputType="phone" />
-
     <Button
-        android:id="@+id/add_dpt_adminBTN"
+        android:id="@+id/find_personBTN"
         android:layout_width="350dp"
         android:textStyle="bold"
         android:layout_height="wrap_content"
@@ -139,7 +47,14 @@
         android:layout_marginStart="30dp"
         android:textColor="@color/white"
         android:background="@drawable/button_back_ground"
-        android:text="Add Department Admin" />
+        android:text="Find" />
 
+
+    <FrameLayout
+        android:id="@+id/find_person_containerFL"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:layout_margin="20dp">
+    </FrameLayout>
 
 </LinearLayout>
