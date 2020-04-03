@@ -27,6 +27,7 @@ public class SearchBookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 searchBookET.getText();
+                System.out.println("testing");
             }
         });
         return view;
