@@ -10,14 +10,15 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/main_logo" />
 
     <Button
         android:id="@+id/emailIDBTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="40dp"
         android:drawableLeft="@drawable/ic_mail"
         android:background="@color/light_gray"
         android:paddingLeft="15dp"
@@ -28,19 +29,70 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/mobileBTN"
+        android:id="@+id/mobile1BTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
         android:drawableLeft="@drawable/ic_call_black_24dp"
         android:background="@color/light_gray"
         android:paddingLeft="15dp"
         android:drawablePadding="10dp"
         android:textColor="@color/white"
-        android:textSize="25dp"
-        android:text="+1 (660) 528-0951"
+        android:textSize="20dp"
+        android:onClick="buttonPressed"
+        android:text="+1 (660) 528-0951 : Deepthi"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/mobile2BTN"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:onClick="buttonPressed"
+        android:drawableLeft="@drawable/ic_call_black_24dp"
+        android:background="@color/light_gray"
+        android:paddingLeft="15dp"
+        android:drawablePadding="10dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:text="+1 (660) 219-8441 : Anil"
+        android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/mobile3BTN"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="buttonPressed"
+        android:layout_marginBottom="5dp"
+        android:drawableLeft="@drawable/ic_call_black_24dp"
+        android:background="@color/light_gray"
+        android:paddingLeft="15dp"
+        android:drawablePadding="10dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:text="+1 (660) 528-1069 : Mahender"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/mobile4BTN"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:onClick="buttonPressed"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:drawableLeft="@drawable/ic_call_black_24dp"
+        android:background="@color/light_gray"
+        android:paddingLeft="15dp"
+        android:drawablePadding="10dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:text="+1 (660) 528-1070 : Rethima"
+        android:textStyle="bold" />
 </LinearLayout>
