@@ -70,7 +70,6 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ListAllBooksFragment()).commit();
                 break;
-
             case R.id.nav_search_book:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SearchBookFragment()).commit();
@@ -99,6 +98,14 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
             case R.id.nav_add_dept_admin:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AddDepartmentAdminFragment()).commit();
+                break;
+            case R.id.nav_user_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new UserProfileFragment()).commit();
+                break;
+            case R.id.nav_change_password:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ChangePasswordFragment()).commit();
                 break;
 
         }
