@@ -36,7 +36,7 @@ public class ContactMenuFragment extends Fragment {
                 }
         });
 
-        mobile2BTN=view.findViewById(R.id.mobile1BTN);
+        mobile2BTN=view.findViewById(R.id.mobile2BTN);
 
         mobile2BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,7 @@ public class ContactMenuFragment extends Fragment {
             }
         });
 
-        mobile4BTN=view.findViewById(R.id.mobile1BTN);
+        mobile4BTN=view.findViewById(R.id.mobile4BTN);
 
         mobile4BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +54,7 @@ public class ContactMenuFragment extends Fragment {
             }
         });
 
-        mobile3BTN=view.findViewById(R.id.mobile1BTN);
+        mobile3BTN=view.findViewById(R.id.mobile3BTN);
 
         mobile3BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,7 @@ public class ContactMenuFragment extends Fragment {
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);
                 intent.putExtra(Intent.EXTRA_SUBJECT,"Questions to be Answered");
                 intent.putExtra(Intent.EXTRA_TEXT,"Kindly write your query here...");
-                intent.putExtra(Intent.EXTRA_CC,"mailcc@gmail.com");
+                intent.putExtra(Intent.EXTRA_CC,"dtchokka@gmail.com");
                 intent.setType("text/html");
                 intent.setPackage("com.google.android.gm");
                 startActivity(Intent.createChooser(intent, "Send mail"));
