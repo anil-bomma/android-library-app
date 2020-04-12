@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars = "vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="60dp"
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <ImageView
+        <ImageView
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/main_logo" />
 
-    <Button
+
+        <Button
         android:id="@+id/emailIDBTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -28,7 +34,7 @@
         android:text="libraryowens@gmail.com"
         android:textStyle="bold" />
 
-    <Button
+        <Button
         android:id="@+id/mobile1BTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -45,7 +51,7 @@
         android:text="+1 (660) 528-0951 : Deepthi"
         android:textStyle="bold" />
 
-    <Button
+        <Button
         android:id="@+id/mobile2BTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -62,7 +68,7 @@
         android:text="+1 (660) 219-8441 : Anil"
         android:textStyle="bold" />
 
-    <Button
+        <Button
         android:id="@+id/mobile3BTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -79,7 +85,7 @@
         android:text="+1 (660) 528-1069 : Mahender"
         android:textStyle="bold" />
 
-    <Button
+        <Button
         android:id="@+id/mobile4BTN"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -95,4 +101,7 @@
         android:textSize="20dp"
         android:text="+1 (660) 528-1070 : Rethima"
         android:textStyle="bold" />
-</LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
