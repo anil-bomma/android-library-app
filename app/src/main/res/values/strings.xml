@@ -17,5 +17,17 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+    
+    <string-array name="book_names">
+        <item>C++</item>
+        <item>JAVA</item>
+        <item>Android</item>
+        <item>Project Management</item>
+        <item>Spring frame works</item>
+        <item>IOS</item>
+        <item>Big Data</item>
+        <item>Data Visualization</item>
+        <item>Machine Learning</item>
+    </string-array>
 
 </resources>
