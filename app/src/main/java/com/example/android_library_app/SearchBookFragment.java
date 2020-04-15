@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,8 +23,13 @@ public class SearchBookFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_book,container,false);
 
+        final AutoCompleteTextView searchBookET = (AutoCompleteTextView) view.findViewById(R.id.searchBookET);
+        String[] books = getResources().getStringArray(R.array.book_names);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, books);
+        searchBookET.setAdapter(adapter);
+
         searchBTN = view.findViewById(R.id.searchBTN);
-        searchBookET = view.findViewById(R.id.searchBookET);
         searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
