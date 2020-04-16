@@ -1,5 +1,7 @@
 package com.example.android_library_app;
 
+import android.app.Activity;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -7,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -108,6 +113,7 @@ public class ListAllDrtAdminsFragment extends Fragment {
     private DptAdminAdapter dptAdminAdapter = null;
     private RecyclerView dptAdminRV = null;
     private GestureDetectorCompat detector = null;
+    private ListAllDrtAdminsFragment myContext;
 
 
     //gesture listener
@@ -157,6 +163,24 @@ public class ListAllDrtAdminsFragment extends Fragment {
             }
         });
 
+        // remove button in list all department Admin screen.
+        Button remove = (Button) view.findViewById(R.id.removeDptAdminButton);
+
+//        Toast.makeText(getActivity(),"Hello : ", Toast.LENGTH_SHORT).show();
+//        try {
+//            remove.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    RemoveDptAdminDialogBox dialogBox = new RemoveDptAdminDialogBox();
+//                    dialogBox.show((getActivity().getSupportFragmentManager()), "delete dialog");
+//                }
+//            });
+//        } catch (Exception e) {
+//            Log.d("Error while button ", " The error is "+e);
+//            Toast.makeText(getActivity(),"Error is "+e,Toast.LENGTH_SHORT).show();
+//        }
+
         return view;
     }
+
 }
