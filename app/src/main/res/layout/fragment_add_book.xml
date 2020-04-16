@@ -34,8 +34,8 @@
         app:layout_constraintVertical_bias="0.120" />
 
     <ScrollView
-        android:layout_width="250dp"
-        android:layout_height="400dp"
+        android:layout_width="365dp"
+        android:layout_height="390dp"
         android:layout_marginStart="16dp"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +48,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -177,38 +177,38 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
-                android:id="@+id/rackIDTV"
+                android:id="@+id/sectionIDTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rack ID"
+                android:text="Section ID"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/black" />
 
             <Spinner
-                android:id="@+id/rackIDSP"
+                android:id="@+id/sectionIDSP"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:entries="@array/rackID"
+                android:entries="@array/sectionID"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/sectionIDTV"
+                android:id="@+id/rackIDTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Section"
+                android:text="Rack"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/sectionIDET"
+                android:id="@+id/rackIDET"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Enter Section ID of the Book"
-                android:inputType="number"
                 android:digits="1,2,3,4,5,6,7,8,9,10"
+                android:hint="Enter Rack ID of the Book"
+                android:inputType="number"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>
