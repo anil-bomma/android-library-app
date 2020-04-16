@@ -22,19 +22,39 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 class BooksModel {
 
-    public static class BooksInfo {
-        public String bookName;
-        public String bookAutor;
-        public String bookEdition;
+    private FirebaseFirestore db;
 
-        public BooksInfo(String bookName, String bookAutor, String bookEdition) {
-            this.bookName = bookName;
-            this.bookAutor = bookAutor;
-            this.bookEdition = bookEdition;
+    public static class BooksInfo {
+        public String title;
+        public String author;
+        public String genre;
+        public int available;
+        public String description;
+        public String publisher;
+        public String language;
+
+
+        public BooksInfo(String title, String author, String genre, String description,
+                         String publisher, String language, int available) {
+            this.title = title;
+            this.author = author;
+            this.genre = genre;
+            this.available = available;
+            this.description = description;
+            this.publisher = publisher;
+            this.language = language;
         }
     }
 
@@ -51,19 +71,48 @@ class BooksModel {
 
     private BooksModel() {
         booksArray = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
         loadModel();
     }
 
     public void loadModel() {
-        booksArray.add(new BooksInfo("C++", "ABC", "12c edition"));
-        booksArray.add(new BooksInfo("JAVA", "DEF", "8th edition"));
-        booksArray.add(new BooksInfo("Android", "GHI", "09 edition"));
-        booksArray.add(new BooksInfo("Project management", "JKL", "12th edition"));
-        booksArray.add(new BooksInfo("Spring frame works", "MNO", "8th edition"));
-        booksArray.add(new BooksInfo("IOS", "PQR", "20th edition"));
-        booksArray.add(new BooksInfo("Big data", "STU", "12 edition"));
-        booksArray.add(new BooksInfo("Data Visualization", "VWX", "8th edition"));
-        booksArray.add(new BooksInfo("Machine Learning", "XYZ", "21st edition"));
+        System.out.println("------------load modal-----------");
+        db.collection("books").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> book = document.getData();
+                                booksArray.add(new BooksInfo(
+                                        book.get("title").toString(),
+                                        book.get("author").toString(),
+                                        book.get("genre").toString(),
+                                        book.get("description").toString(),
+                                        book.get("publisher").toString(),
+                                        book.get("language").toString(),
+                                        Integer.parseInt(book.get("available").toString())
+                                ));
+                            }
+                        } else {
+                            Log.w("ListAllBooks", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+//        booksArray.add(new BooksInfo("C++", "ABC", "12c edition"));
+//        booksArray.add(new BooksInfo("JAVA", "DEF", "8th edition"));
+//        booksArray.add(new BooksInfo("Android", "GHI", "09 edition"));
+//        booksArray.add(new BooksInfo("Project management", "JKL", "12th edition"));
+//        booksArray.add(new BooksInfo("Spring frame works", "MNO", "8th edition"));
+//        booksArray.add(new BooksInfo("IOS", "PQR", "20th edition"));
+//        booksArray.add(new BooksInfo("Big data", "STU", "12 edition"));
+//        booksArray.add(new BooksInfo("Data Visualization", "VWX", "8th edition"));
+//        booksArray.add(new BooksInfo("Machine Learning", "XYZ", "21st edition"));
     }
 }
 
@@ -98,11 +147,11 @@ class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BooksViewHolder holder, int position) {
         TextView bookName = holder.convienceViewReference.findViewById(R.id.bookName);
-        bookName.setText(booksModel.booksArray.get(position).bookName);
+        bookName.setText(booksModel.booksArray.get(position).title);
         TextView bookAuthor = holder.convienceViewReference.findViewById(R.id.bookAuthor);
-        bookAuthor.setText(booksModel.booksArray.get(position).bookAutor);
+        bookAuthor.setText(booksModel.booksArray.get(position).author);
         TextView bookEdition = holder.convienceViewReference.findViewById(R.id.bookEdition);
-        bookEdition.setText(booksModel.booksArray.get(position).bookEdition);
+        bookEdition.setText(booksModel.booksArray.get(position).publisher);
     }
 
     @Override
