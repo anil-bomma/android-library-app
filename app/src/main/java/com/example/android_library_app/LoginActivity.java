@@ -50,8 +50,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = emailIdET.getText().toString().trim();
-                String password = passwordET.getText().toString().trim();
-                authenticateUsernamePassword(email, password);
+                if(email.isEmpty()) {
+                    emailIdET.setError("Please enter your mail ID");
+                }
+                else {
+                    String password = passwordET.getText().toString().trim();
+                    if(password.isEmpty()) {
+                        passwordET.setError("Please enter your password");
+                    }
+                    else {
+                        authenticateUsernamePassword(email, password);
+                    }
+                }
             }
         });
     }
@@ -79,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(
                             LoginActivity.this,
-                            "Error ! " + task.getException().getMessage(),
+                            "Invalid credentials Please try again " + task.getException().getMessage(),
                             Toast.LENGTH_LONG).show();
                 }
             }
