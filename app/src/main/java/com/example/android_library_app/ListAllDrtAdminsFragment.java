@@ -65,19 +65,32 @@ class DptAdminModel {
 
 class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewHolder> {
 
-    public static class DptAdminViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout convienceViewReference;
+    public static class DptAdminViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public DptAdminViewHolder(@NonNull LinearLayout linearLayout) {
+        private LinearLayout convienceViewReference;
+        MyOnClick myOnClick;
+
+        private Button  removeBTN;
+        public DptAdminViewHolder(@NonNull LinearLayout linearLayout,MyOnClick myOnClick) {
             super(linearLayout);
+            removeBTN = linearLayout.findViewById(R.id.removeDptAdminButton);
             convienceViewReference = linearLayout;
+            this.myOnClick = myOnClick;
+            removeBTN.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            myOnClick.onItemClick(getAdapterPosition());
         }
     }
 
+    private MyOnClick myOnClick;
     DptAdminModel dptAdminModel;
 
-    public DptAdminAdapter() {
+    public DptAdminAdapter(MyOnClick myOnClick) {
         super();
+        this.myOnClick = myOnClick;
         dptAdminModel = DptAdminModel.getSingleton();
     }
 
@@ -86,7 +99,7 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
     public DptAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_dpt_admin, parent, false);
-        DptAdminViewHolder dAVH = new DptAdminViewHolder(v);
+        DptAdminViewHolder dAVH = new DptAdminViewHolder(v,myOnClick);
         return dAVH;
     }
 
@@ -104,16 +117,26 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
     public int getItemCount() {
         return dptAdminModel.dptAdminArray.size();
     }
+
+    public interface MyOnClick{
+        void onItemClick(int position);
+    }
 }
 
 
-public class ListAllDrtAdminsFragment extends Fragment {
+public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapter.MyOnClick {
 
     // recycler view.
     private DptAdminAdapter dptAdminAdapter = null;
     private RecyclerView dptAdminRV = null;
     private GestureDetectorCompat detector = null;
-    private ListAllDrtAdminsFragment myContext;
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(getActivity(), "The position is "+position, Toast.LENGTH_SHORT).show();
+        RemoveDptAdminDialogBox dialogBox = new RemoveDptAdminDialogBox();
+        dialogBox.show((getActivity().getSupportFragmentManager()), "delete dialog");
+    }
 
 
     //gesture listener
@@ -146,8 +169,9 @@ public class ListAllDrtAdminsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_list_all_dpt_admin, container, false);
 
+        Button removeBTN;
         // recycler view code.
-        dptAdminAdapter = new DptAdminAdapter();
+        dptAdminAdapter = new DptAdminAdapter(this);
         dptAdminRV = view.findViewById(R.id.myDptAdminRV);
         dptAdminRV.setAdapter(dptAdminAdapter);
 
@@ -163,22 +187,6 @@ public class ListAllDrtAdminsFragment extends Fragment {
             }
         });
 
-        // remove button in list all department Admin screen.
-        Button remove = (Button) view.findViewById(R.id.removeDptAdminButton);
-
-//        Toast.makeText(getActivity(),"Hello : ", Toast.LENGTH_SHORT).show();
-//        try {
-//            remove.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    RemoveDptAdminDialogBox dialogBox = new RemoveDptAdminDialogBox();
-//                    dialogBox.show((getActivity().getSupportFragmentManager()), "delete dialog");
-//                }
-//            });
-//        } catch (Exception e) {
-//            Log.d("Error while button ", " The error is "+e);
-//            Toast.makeText(getActivity(),"Error is "+e,Toast.LENGTH_SHORT).show();
-//        }
 
         return view;
     }
