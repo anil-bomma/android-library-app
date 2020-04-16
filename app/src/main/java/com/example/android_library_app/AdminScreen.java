@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -128,6 +129,9 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
         MainActivity.loginStatus = false;
         fAuth.signOut();
         navSetting.setNavigation(AdminScreen.this, "", "");
+        Toast.makeText(AdminScreen.this, "Logged Out..!!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AdminScreen.this, AdminScreen.class);
+        startActivity(intent);
     }
 
 
