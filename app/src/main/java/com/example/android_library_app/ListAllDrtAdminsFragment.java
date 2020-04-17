@@ -34,6 +34,7 @@ import java.util.Map;
 
 class DptAdminModel {
     private FirebaseFirestore db;
+
     public static class DptAdminInfo {
         public String dptAdminName;
         public String dpt_919;
@@ -71,10 +72,10 @@ class DptAdminModel {
         db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()) {
-                    for(QueryDocumentSnapshot document: task.getResult()) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
                         Map<String, Object> user = document.getData();
-                        if(user.get("role").toString().equals("departmentAdmin")) {
+                        if (user.get("role").toString().equals("departmentAdmin")) {
                             dptAdminArray.add(new DptAdminInfo(
                                     user.get("firstname").toString() + " " + user.get("lastname").toString(),
                                     user.get("studentId").toString(),
@@ -104,8 +105,9 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
         private LinearLayout convienceViewReference;
         MyOnClick myOnClick;
 
-        private Button  removeBTN;
-        public DptAdminViewHolder(@NonNull LinearLayout linearLayout,MyOnClick myOnClick) {
+        private Button removeBTN;
+
+        public DptAdminViewHolder(@NonNull LinearLayout linearLayout, MyOnClick myOnClick) {
             super(linearLayout);
             removeBTN = linearLayout.findViewById(R.id.removeDptAdminButton);
             convienceViewReference = linearLayout;
@@ -133,7 +135,7 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
     public DptAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_list_dpt_admin, parent, false);
-        DptAdminViewHolder dAVH = new DptAdminViewHolder(v,myOnClick);
+        DptAdminViewHolder dAVH = new DptAdminViewHolder(v, myOnClick);
         return dAVH;
     }
 
@@ -152,7 +154,7 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
         return dptAdminModel.dptAdminArray.size();
     }
 
-    public interface MyOnClick{
+    public interface MyOnClick {
         void onItemClick(int position);
     }
 }
@@ -164,10 +166,11 @@ public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapte
     private DptAdminAdapter dptAdminAdapter = null;
     private RecyclerView dptAdminRV = null;
     private GestureDetectorCompat detector = null;
+    public static String KEY_DptAdmin919 = "";
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(), "The position is "+position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "The position is " + position, Toast.LENGTH_SHORT).show();
         RemoveDptAdminDialogBox dialogBox = new RemoveDptAdminDialogBox();
         dialogBox.show((getActivity().getSupportFragmentManager()), "delete dialog");
     }
@@ -176,18 +179,21 @@ public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapte
     //gesture listener
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener {
 
+
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             View view = dptAdminRV.findChildViewUnder(e.getX(), e.getY());
             if (view != null) {
                 RecyclerView.ViewHolder holder = dptAdminRV.getChildViewHolder(view);
 
-                if (holder instanceof BooksAdapter.BooksViewHolder) {
+                if (holder instanceof DptAdminAdapter.DptAdminViewHolder) {
                     int position = holder.getAdapterPosition();
-
+                    DptAdminModel myDptAdminModel = DptAdminModel.getSingleton();
+                    String itemClicked919 = myDptAdminModel.dptAdminArray.get(position).dpt_919;
+                    KEY_DptAdmin919 = itemClicked919;
+                    Toast.makeText(getContext(), " Item clicked is " + itemClicked919, Toast.LENGTH_SHORT).show();
                     // handling single tap.
                     Log.d("click", "clicked on item " + position);
-                    BooksModel myModel = BooksModel.getSingleton();
                     return true;
                 }
             }
