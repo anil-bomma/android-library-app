@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
 
     EditText emailIdET, passwordET;
-    TextView registerTV;
+    TextView registerTV, forgetPasswordTV;
     Button loginBTN;
 
     public static String email = "";
@@ -43,6 +43,20 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // forget password intent.
+        forgetPasswordTV = findViewById(R.id.forgetPasswordTV);
+        forgetPasswordTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.
+                        class);
+                startActivityForResult(intent,1);
+            }
+        });
+
+
+
 
         // login code
         fAuth = FirebaseAuth.getInstance();
