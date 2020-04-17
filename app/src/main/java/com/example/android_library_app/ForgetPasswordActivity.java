@@ -71,7 +71,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 mailId = forgetPasswordEmailIdET.getText().toString();
                 System.out.println("-------------------mailID--------------- "+ mailId + " ----------------");
                 if(mailId.isEmpty()) {
-                    forgetPasswordEmailIdET.setError("Please enter the mailId given during registration");
+                    forgetPasswordEmailIdET.setError("Please enter valid mailId");
                 }
                 else {
                     //getting the password.
@@ -92,6 +92,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                                 "Hello " + username +
                                                         ", A mail is sent to your registered mailID ",
                                                 Toast.LENGTH_SHORT).show();
+                                    }
+                                    // trying
+                                    else {
+                                        forgetPasswordEmailIdET.setError("Please enter the mailId given during registration");
                                     }
                                 }
                             }
@@ -132,6 +136,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT
                         ).show();
                     }
+                }
+                //trying
+                else {
+                    forgetPasswordEmailIdET.setError("Email Id doesn't exist.");
                 }
             }
         });
