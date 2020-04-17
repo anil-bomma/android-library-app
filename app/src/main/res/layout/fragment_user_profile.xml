@@ -71,7 +71,7 @@
             android:gravity="center"
             android:layout_marginStart="10dp"
             android:layout_gravity="start"
-            android:textSize="27dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView
@@ -80,9 +80,9 @@
             android:layout_height="wrap_content"
             android:text="number"
             android:gravity="center"
-            android:layout_marginStart="76dp"
+            android:layout_marginStart="45dp"
             android:layout_gravity="start"
-            android:textSize="27dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
@@ -107,7 +107,7 @@
             android:gravity="center"
             android:layout_marginStart="10dp"
             android:layout_gravity="start"
-            android:textSize="27dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView
@@ -116,9 +116,9 @@
             android:layout_height="wrap_content"
             android:text="Mail ID"
             android:gravity="center"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="22dp"
             android:layout_gravity="start"
-            android:textSize="27dp"
+            android:textSize="20dp"
             android:textStyle="bold" />
     </LinearLayout>
 
