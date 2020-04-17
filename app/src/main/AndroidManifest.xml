@@ -11,21 +11,23 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisrationVerificationScreen"></activity>
+        <activity android:name=".ForgetPasswordActivity"></activity>
+        <activity android:name=".RegisrationVerificationScreen" />
         <activity android:name=".RegistrationScreen" />
-        <activity android:name=".UserScreen"></activity>
+        <activity android:name=".UserScreen" />
         <activity android:name=".DepartmentAdminScreen" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".FlashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminScreen" android:theme="@style/AppTheme.NoActivity" >
-        </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity
+            android:name=".AdminScreen"
+            android:theme="@style/AppTheme.NoActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
