@@ -22,19 +22,27 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 class DptAdminModel {
-
+    private FirebaseFirestore db;
     public static class DptAdminInfo {
         public String dptAdminName;
         public String dpt_919;
-        public String dpt_name;
+        public String dptAdminMail;
 
-        public DptAdminInfo(String dptAdminName, String dpt_919, String dpt_name) {
+        public DptAdminInfo(String dptAdminName, String dpt_919, String dptAdminMail) {
             this.dptAdminName = dptAdminName;
             this.dpt_919 = dpt_919;
-            this.dpt_name = dpt_name;
+            this.dptAdminMail = dptAdminMail;
         }
     }
 
@@ -51,14 +59,40 @@ class DptAdminModel {
 
     private DptAdminModel() {
         dptAdminArray = new ArrayList<>();
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
         loadModel();
     }
 
     public void loadModel() {
-        dptAdminArray.add(new DptAdminInfo("Mahender Reddy Surkanti", "919585353", "Politics & Business"));
-        dptAdminArray.add(new DptAdminInfo("Anil Bomma", "919000000", "Applied Computer Science "));
-        dptAdminArray.add(new DptAdminInfo("Deepthi Tejaswani Chokka ", "919000000", "Information Systems"));
-        dptAdminArray.add(new DptAdminInfo("Rethimareddy Polam", "919584780", "Arts and Science"));
+        db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    for(QueryDocumentSnapshot document: task.getResult()) {
+                        Map<String, Object> user = document.getData();
+                        if(user.get("role").toString().equals("departmentAdmin")) {
+                            dptAdminArray.add(new DptAdminInfo(
+                                    user.get("firstname").toString() + " " + user.get("lastname").toString(),
+                                    user.get("studentId").toString(),
+                                    user.get("emailId").toString()
+                            ));
+                        }
+                    }
+                } else {
+                    Log.w("ListAllBooks", "Error getting documents.", task.getException());
+                }
+            }
+        });
+
+//        dptAdminArray.add(new DptAdminInfo("Mahender Reddy Surkanti", "919585353", "Politics & Business"));
+//        dptAdminArray.add(new DptAdminInfo("Anil Bomma", "919000000", "Applied Computer Science "));
+//        dptAdminArray.add(new DptAdminInfo("Deepthi Tejaswani Chokka ", "919000000", "Information Systems"));
+//        dptAdminArray.add(new DptAdminInfo("Rethimareddy Polam", "919584780", "Arts and Science"));
+
     }
 }
 
@@ -110,7 +144,7 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
         TextView admin919 = holder.convienceViewReference.findViewById(R.id.dpt_admin_919TV);
         admin919.setText(dptAdminModel.dptAdminArray.get(position).dpt_919);
         TextView dptName = holder.convienceViewReference.findViewById(R.id.dpt_name);
-        dptName.setText(dptAdminModel.dptAdminArray.get(position).dpt_name);
+        dptName.setText(dptAdminModel.dptAdminArray.get(position).dptAdminMail);
     }
 
     @Override
