@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class AdminScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AdminScreen extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
+//        SearchPersonFragment.SearchListener {
 
     private DrawerLayout drawer;
     public static Menu nav_menu;
@@ -60,6 +63,11 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new ListAllBooksFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_list_all_books);
+
+
+//            FragmentManager fm = getSupportFragmentManager();
+//            searchPersonFragment = (SearchPersonFragment) fm.findFragmentByTag("orderFR");
+            return;
         }
     }
 
@@ -149,4 +157,14 @@ public class AdminScreen extends AppCompatActivity implements NavigationView.OnN
             super.onBackPressed();
         }
     }
+
+
+//    // list all dept-admin fragment code comes here
+//    private SearchPersonFragment searchPersonFragment;
+//
+//    @Override
+//    public void addPressed() {
+//
+//        Toast.makeText(AdminScreen.this, "Added the user as department admin", Toast.LENGTH_SHORT).show();
+//    }
 }

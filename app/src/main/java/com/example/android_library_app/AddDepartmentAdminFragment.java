@@ -15,27 +15,30 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
+
 public class AddDepartmentAdminFragment extends Fragment
-//        implements SearchPersonFragment.SearchListener
-    {
+        implements SearchPersonFragment.SearchListener {
 
     private SearchPersonFragment searchPersonFragment;
+    private FirebaseFirestore db;
     Button find_personBTN;
-    EditText  dpt_admin_919ET;
+    EditText dpt_admin_919ET;
     View view;
-    boolean count = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         view= inflater.inflate(R.layout.fragment_add_dpt_admin, container, false);
+        view = inflater.inflate(R.layout.fragment_add_dpt_admin, container, false);
 
-         // fragment code.
+        // fragment code.
         // first time only code.
         if (savedInstanceState != null) {
             FragmentManager manager = getActivity().getSupportFragmentManager();
             searchPersonFragment = (SearchPersonFragment) manager.findFragmentByTag("searchFR");
-            //return;
+            return view;
         }
 
         searchPersonFragment = new SearchPersonFragment();
@@ -47,26 +50,42 @@ public class AddDepartmentAdminFragment extends Fragment
         transaction.commit();
 
 
+        // database initialization
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+
 
         find_personBTN = view.findViewById(R.id.find_personBTN);
         find_personBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
+                try {
 
                     dpt_admin_919ET = view.findViewById(R.id.dpt_admin_919ET);
-                    String dpt_admin_919 = dpt_admin_919ET.getText().toString().trim();
-                    if(validateDptAdmin(dpt_admin_919) == false) {
-                        // temporary code.
-                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    final String dpt_admin_919 = dpt_admin_919ET.getText().toString().trim();
+                    if (validateDptAdmin(dpt_admin_919)) {
+
+                        Bundle args = new Bundle();
+                        args.putString("userId", dpt_admin_919);
+                        searchPersonFragment = new SearchPersonFragment();
+                        searchPersonFragment.setArguments(args);
+
+                        FragmentTransaction transaction = getActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.find_person_containerFL, searchPersonFragment);
+
                         transaction.show(searchPersonFragment);
                         transaction.commit();
-                    }
-                    else {
+
+                    } else {
                         Toast.makeText(getActivity(), "Enter  #919", Toast.LENGTH_SHORT).show();
                     }
-                }catch(Exception e) {
-                    Log.d("Error occured"," is "+e);
+                } catch (Exception e) {
+                    Log.d("Error occurred", " is " + e);
                     Toast.makeText(getActivity(), "Enter proper 919 number", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -75,15 +94,16 @@ public class AddDepartmentAdminFragment extends Fragment
     }
 
     private boolean validateDptAdmin(String dpt_admin_919) {
-        if(dpt_admin_919.isEmpty()) {
+        if (dpt_admin_919.isEmpty()) {
             dpt_admin_919ET.setError("Enter the 919 number");
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
-//    @Override
-//    public void addPressed() {
-//        Toast.makeText(getActivity(), "Added the user as department admin", Toast.LENGTH_SHORT).show();
-//    }
+
+    @Override
+    public void addPressed() {
+        Toast.makeText(getActivity(), "Added the user as department admin", Toast.LENGTH_SHORT).show();
+    }
 }
