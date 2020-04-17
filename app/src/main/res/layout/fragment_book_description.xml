@@ -22,6 +22,7 @@
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="italic"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
     <TextView
@@ -29,16 +30,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Book Title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Title of the Book"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/BTitleTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:hint="Book Title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -47,16 +47,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Book Author"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Author of the Book"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/BAuthorTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:hint="Book Author"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -65,16 +64,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Book Genre"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Genre of the Book"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/BGenreTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:hint="Book Genre"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
@@ -83,16 +81,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Book Description"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Description of the Book"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/BDescriptionTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:hint="Book Description"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -101,9 +98,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Book Language"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Language of the Book Written"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 
 
@@ -112,7 +109,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:hint="Book Language"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -121,16 +117,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Book Publisher"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:text="Publisher of the Book"
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/BPublisherTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:hint="Book Publisher"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -139,19 +134,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:text="Number of Books Available"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
         android:id="@+id/BAvailableTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAlignment="center"
         android:hint="Book Available"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_back_ground"
+        android:text="Borrow Book"
+        android:textColor="#000000"
+        android:textStyle="bold" />
 
 
 </LinearLayout>
