@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView registerTV;
     Button loginBTN;
 
+    public static String email = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailIdET.getText().toString().trim();
+                email = emailIdET.getText().toString().trim();
                 if(email.isEmpty()) {
                     emailIdET.setError("Please enter your mail ID");
                 }
