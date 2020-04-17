@@ -1,6 +1,7 @@
 package com.example.android_library_app;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,12 +29,20 @@ public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
 
     private FirebaseFirestore db;
     private CollectionReference userRef;
+//    private DptAdminAdapter dptAdminAdapter = null;
+//    private DialogListener dialogListener;
+//
+//    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+//        dptAdminAdapter = new DptAdminAdapter();
         builder.setTitle("Delete");
 
         builder.setMessage("Do you want to remove this person as department Admin");
@@ -44,6 +54,8 @@ public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
                         "admin to normal user." + which, Toast.LENGTH_SHORT).show();
                 System.out.println("-----ListAllDrtAdminsFragment" + ListAllDrtAdminsFragment.KEY_DptAdmin919);
                 updateUserRole(ListAllDrtAdminsFragment.KEY_DptAdmin919);
+//                dialogListener.callBackDialog();
+////                dptAdminAdapter.notifyDataSetChanged();
             }
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -54,6 +66,15 @@ public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
         });
         return builder.create();
     }
+//
+//    // trying
+//    public interface DialogListener {
+//        void callBackDialog();
+//    }
+//
+//
+//
+
 
     private void updateUserRole(final String dptAdmin919) {
         db = FirebaseFirestore.getInstance();
@@ -72,6 +93,7 @@ public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
                             Map<String, Object> user = new HashMap<>();
                             user.put("role", "student");
                             userRef.document(document.getId()).set(user, SetOptions.merge());
+//                            dptAdminAdapter.notifyDataSetChanged();
                         }
                     }
                 }
