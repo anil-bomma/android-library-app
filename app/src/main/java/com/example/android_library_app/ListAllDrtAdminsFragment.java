@@ -130,6 +130,10 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
         dptAdminModel = DptAdminModel.getSingleton();
     }
 
+//    public DptAdminAdapter() {
+//        super();
+//        dptAdminModel = DptAdminModel.getSingleton();
+//    }
     @NonNull
     @Override
     public DptAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -160,7 +164,9 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
 }
 
 
-public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapter.MyOnClick {
+public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapter.MyOnClick
+//        , RemoveDptAdminDialogBox.DialogListener
+    {
 
     // recycler view.
     private DptAdminAdapter dptAdminAdapter = null;
@@ -174,6 +180,11 @@ public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapte
         RemoveDptAdminDialogBox dialogBox = new RemoveDptAdminDialogBox();
         dialogBox.show((getActivity().getSupportFragmentManager()), "delete dialog");
     }
+//
+//    @Override
+//    public void callBackDialog() {
+//        dptAdminAdapter.notifyDataSetChanged();
+//    }
 
 
     //gesture listener
@@ -185,14 +196,14 @@ public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapte
             View view = dptAdminRV.findChildViewUnder(e.getX(), e.getY());
             if (view != null) {
                 RecyclerView.ViewHolder holder = dptAdminRV.getChildViewHolder(view);
-
+                // handling single tap.
                 if (holder instanceof DptAdminAdapter.DptAdminViewHolder) {
                     int position = holder.getAdapterPosition();
                     DptAdminModel myDptAdminModel = DptAdminModel.getSingleton();
                     String itemClicked919 = myDptAdminModel.dptAdminArray.get(position).dpt_919;
                     KEY_DptAdmin919 = itemClicked919;
                     Toast.makeText(getContext(), " Item clicked is " + itemClicked919, Toast.LENGTH_SHORT).show();
-                    // handling single tap.
+
                     Log.d("click", "clicked on item " + position);
                     return true;
                 }
