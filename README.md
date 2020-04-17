@@ -12,7 +12,7 @@ Developing a library application which is used for searching and renting books u
 
 <h2> Introduction to our Project:</h2>
 <p>
-  
+  Our B. D. Owens Library is maintaining website for the book tracking. To know where a specific book is located in library, we need to go to library and use only library desktops. By our project we will create an android application in which we will keep track of all the books in the library. Admin will add the book name, details and the location where it is kept and the users will search the book by book name or description and can see in which place the book is located. The users/Student can also view the books they already borrowed and the due dates of them are also shown.
   </p>
   
   <h2>Specifications/Support Version:</h2>
