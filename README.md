@@ -41,8 +41,8 @@ To run this app we need internet.
 <h2>Sources used for our Project:</h2>
 
 <p>
-https://stackoverflow.com/questions/15748558/android-developer-documentation-download
-https://www.youtube.com/watch?v=tLVz5wmNyrw
+<li>https://stackoverflow.com/questions/15748558/android-developer-documentation-download
+<li>https://www.youtube.com/watch?v=tLVz5wmNyrw
 </p>
 
 <h2>Test Credentials:</h2>
