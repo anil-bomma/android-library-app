@@ -44,14 +44,14 @@ class BooksModel {
         public String title;
         public String author;
         public String genre;
-        public int available;
+        public String available;
         public String description;
         public String publisher;
         public String language;
 
 
         public BooksInfo(String title, String author, String genre, String description,
-                         String publisher, String language, int available) {
+                         String publisher, String language, String available) {
             this.title = title;
             this.author = author;
             this.genre = genre;
@@ -99,7 +99,7 @@ class BooksModel {
                                         book.get("description").toString(),
                                         book.get("publisher").toString(),
                                         book.get("language").toString(),
-                                        Integer.parseInt(book.get("available").toString())
+                                        book.get("available").toString()
                                 ));
                             }
                         } else {
@@ -171,7 +171,8 @@ public class ListAllBooksFragment extends Fragment {
     private BooksAdapter booksAdapter = null;
     private RecyclerView booksRV = null;
     private GestureDetectorCompat detector = null;
-    public static String bookTitle;
+    public static String bookTitle,bookAuthor,bookGenre,bookDescription,bookPublisher,bookLanguage,bookAvailable;
+//    public static int bookAvailable;
     private BookDescriptionFragment bookDescriptionFragment = new BookDescriptionFragment() ;
 
     //gesture listener
@@ -191,6 +192,15 @@ public class ListAllBooksFragment extends Fragment {
                     //Obtaining the title of the book
                     BooksModel myModel = BooksModel.getSingleton();
                     bookTitle = myModel.booksArray.get(position).title;
+                    bookAuthor = myModel.booksArray.get(position).author;
+                    bookGenre = myModel.booksArray.get(position).genre;
+                    bookAvailable = myModel.booksArray.get(position).available;
+                    bookDescription = myModel.booksArray.get(position).description;
+                    bookPublisher = myModel.booksArray.get(position).publisher;
+                    bookLanguage = myModel.booksArray.get(position).language;
+
+
+
                     Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

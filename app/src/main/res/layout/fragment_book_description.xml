@@ -16,7 +16,7 @@
         android:src="@drawable/logo" />
 
     <TextView
-        android:id="@+id/DAbout"
+        android:id="@+id/DAboutTV"
         android:text="About The Book"
         android:textSize="30dp"
         android:textAlignment="center"
@@ -25,7 +25,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
     <TextView
-        android:id="@+id/BDTitle"
+        android:id="@+id/BDTitleTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -34,7 +34,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BTitle"
+        android:id="@+id/BTitleTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -43,7 +43,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BDAuthor"
+        android:id="@+id/BDAuthorTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -52,7 +52,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BAuthor"
+        android:id="@+id/BAuthorTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -61,7 +61,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BDGenre"
+        android:id="@+id/BDGenreTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -70,7 +70,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BGenre"
+        android:id="@+id/BGenreTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -79,7 +79,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
     <TextView
-        android:id="@+id/BDDescription"
+        android:id="@+id/BDDescriptionTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -88,7 +88,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BDescription"
+        android:id="@+id/BDescriptionTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -97,7 +97,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BDLanguage"
+        android:id="@+id/BDLanguageTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -108,7 +108,7 @@
 
 
     <TextView
-        android:id="@+id/BLanguage"
+        android:id="@+id/BLanguageTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -117,7 +117,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BDPublisher"
+        android:id="@+id/BDPublisherTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -126,7 +126,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BPublisher"
+        android:id="@+id/BPublisherTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -135,16 +135,16 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BDAvailable"
+        android:id="@+id/BDAvailableTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:text="Book Available"
+        android:text="Number of Books Available"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
-        android:id="@+id/BAvailable"
+        android:id="@+id/BAvailableTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -152,23 +152,6 @@
         android:hint="Book Available"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:id="@+id/BDSectionID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:text="Book SectionID"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:id="@+id/BSectionID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:hint="Book SectionID"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
 </LinearLayout>
