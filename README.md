@@ -1,14 +1,62 @@
 # android-library-app
 Developing a library application which is used for searching and renting books using mobile application.
 
-<h1>App Name: Library</h1>
+<h1>App Name:Northwest Library</h1>
 <h2>App Logo<h2>
   
 <h2>Team Members:</h2>
  <li>1.Anil Bomma</li>
  <li>2.Rethimareddy Polam</li>
  <li>3.Mahender Reddy Surkanti</li>
- <li>4. Deepthi Tejaswani Chokka</li>
+ <li>4.Deepthi Tejaswani Chokka</li>
 
 <h2> Introduction to our Project:</h2>
+<p>
+  
+  </p>
+  
+  <h2>Specifications/Support Version:</h2>
+<p>We are using android API version of pixel 3a XL API 28. The size of the layout is 1080*2160 with a density of 400. 
+The complete details of the device we have used in our project is:
+Device Name: Pixel 3a XL API 28
+Android API: 9.0 API 28
+Size: 1080*2160 </p>
+Database: Firebase
+    
+  <h2>Installation Steps</h2>
+  
+
+  
+  <h2>Requirements:</h2>
+  <p>
+  <ul>
+Mobile with the Android operating System.
+We need the above API properties to run the app and to have good user interface.
+Minimum 1 GB RAM.
+Minimum 8 GB internal storage
+To run this app we need internet.
+</ul>
+</p>
+
+<h2>Sources used for our Project:</h2>
+
+<p>
+https://stackoverflow.com/questions/15748558/android-developer-documentation-download
+https://www.youtube.com/watch?v=tLVz5wmNyrw
+</p>
+
+<h2>Test Credentials:</h2>
+<p>
+<ul>
+ Username for Admin: s537157@nwmissouri.edu
+ password:123456
+ </ul>
+ <ul>
+ Username for Department Admin: s537240@nwmissouri.edu
+ password:123456
+ </ul>
+</p>
+<h2>Layouts of our project:<h2>
+  
+ 
 
