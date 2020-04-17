@@ -1,5 +1,7 @@
 package com.example.android_library_app;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +16,14 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import androidx.core.view.GestureDetectorCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -80,7 +84,7 @@ class BooksModel {
     }
 
     public void loadModel() {
-        System.out.println("------------load modal-----------");
+        System.out.println("------------load model-----------");
         db.collection("books").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -167,10 +171,13 @@ public class ListAllBooksFragment extends Fragment {
     private BooksAdapter booksAdapter = null;
     private RecyclerView booksRV = null;
     private GestureDetectorCompat detector = null;
-
+    public static String bookTitle;
+    private BookDescriptionFragment bookDescriptionFragment = new BookDescriptionFragment() ;
 
     //gesture listener
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        private Context context;
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
@@ -181,9 +188,21 @@ public class ListAllBooksFragment extends Fragment {
                 if (holder instanceof BooksAdapter.BooksViewHolder) {
                     int position = holder.getAdapterPosition();
 
+                    //Obtaining the title of the book
+                    BooksModel myModel = BooksModel.getSingleton();
+                    bookTitle = myModel.booksArray.get(position).title;
+                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
+
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.fragment_container,bookDescriptionFragment,"book description");
+                    transaction.commit();
+
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new BookDescriptionFragment()).commit();
+
+
                     // handling single tap.
                     Log.d("click", "clicked on item " + position);
-                    BooksModel myModel = BooksModel.getSingleton();
                     return true;
                 }
             }
@@ -203,7 +222,7 @@ public class ListAllBooksFragment extends Fragment {
         booksAdapter = new BooksAdapter();
         booksRV = view.findViewById(R.id.myRV);
         booksRV.setAdapter(booksAdapter);
-
+        bookDescriptionFragment  = new BookDescriptionFragment();
         RecyclerView.LayoutManager myManager = new LinearLayoutManager(view.getContext());
         booksRV.setLayoutManager(myManager);
 
