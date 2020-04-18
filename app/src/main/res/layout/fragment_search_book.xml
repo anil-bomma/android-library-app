@@ -32,86 +32,10 @@
         android:text="Search"
         android:textSize="15dp" />
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mySearchBookRV"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:background="@color/light_blue">
-
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="75dp"
-            android:layout_gravity="start"
-            android:src="@drawable/user_default_logo"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:text="C++"/>
-            <TextView
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Dr. Hoot"/>
-            <TextView
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="9th Edition"/>
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:background="@color/light_blue">
-
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="75dp"
-            android:layout_gravity="start"
-            android:src="@drawable/user_default_logo"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:text="C++"/>
-            <TextView
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Dr. Case"/>
-            <TextView
-                android:layout_marginStart="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="8th edition"/>
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
