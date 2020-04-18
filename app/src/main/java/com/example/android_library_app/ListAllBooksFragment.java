@@ -205,10 +205,11 @@ public class ListAllBooksFragment extends Fragment {
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.add(R.id.fragment_container,bookDescriptionFragment,"book description");
+                    transaction.addToBackStack(null);
                     transaction.commit();
 
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new BookDescriptionFragment()).commit();
+                            new BookDescriptionFragment()).addToBackStack(null).commit();
 
 
                     // handling single tap.
