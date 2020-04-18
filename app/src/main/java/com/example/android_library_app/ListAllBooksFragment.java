@@ -39,6 +39,7 @@ import java.util.Map;
 class BooksModel {
 
     private FirebaseFirestore db;
+    public static BooksAdapter booksAdapter = new BooksAdapter();
 
     public static class BooksInfo {
         public String title;
@@ -102,6 +103,7 @@ class BooksModel {
                                         book.get("available").toString()
                                 ));
                             }
+                            booksAdapter.notifyDataSetChanged();
                         } else {
                             Log.w("ListAllBooks", "Error getting documents.", task.getException());
                         }
@@ -171,9 +173,9 @@ public class ListAllBooksFragment extends Fragment {
     private BooksAdapter booksAdapter = null;
     private RecyclerView booksRV = null;
     private GestureDetectorCompat detector = null;
-    public static String bookTitle,bookAuthor,bookGenre,bookDescription,bookPublisher,bookLanguage,bookAvailable;
-//    public static int bookAvailable;
-    private BookDescriptionFragment bookDescriptionFragment = new BookDescriptionFragment() ;
+    public static String bookTitle, bookAuthor, bookGenre, bookDescription, bookPublisher, bookLanguage, bookAvailable;
+    //    public static int bookAvailable;
+    private BookDescriptionFragment bookDescriptionFragment = new BookDescriptionFragment();
 
     //gesture listener
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -200,11 +202,10 @@ public class ListAllBooksFragment extends Fragment {
                     bookLanguage = myModel.booksArray.get(position).language;
 
 
-
                     Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    transaction.add(R.id.fragment_container,bookDescriptionFragment,"book description");
+                    transaction.add(R.id.fragment_container, bookDescriptionFragment, "book description");
                     transaction.addToBackStack(null);
                     transaction.commit();
 
@@ -233,7 +234,7 @@ public class ListAllBooksFragment extends Fragment {
         booksAdapter = new BooksAdapter();
         booksRV = view.findViewById(R.id.myRV);
         booksRV.setAdapter(booksAdapter);
-        bookDescriptionFragment  = new BookDescriptionFragment();
+        bookDescriptionFragment = new BookDescriptionFragment();
         RecyclerView.LayoutManager myManager = new LinearLayoutManager(view.getContext());
         booksRV.setLayoutManager(myManager);
 
