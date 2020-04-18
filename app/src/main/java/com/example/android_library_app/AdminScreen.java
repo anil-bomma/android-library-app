@@ -61,7 +61,7 @@ public class AdminScreen extends AppCompatActivity implements
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ListAllBooksFragment()).commit();
+                    new ListAllBooksFragment()).addToBackStack(null).commit();
             navigationView.setCheckedItem(R.id.nav_list_all_books);
 
 
@@ -77,11 +77,11 @@ public class AdminScreen extends AppCompatActivity implements
         switch (menuItem.getItemId()) {
             case R.id.nav_list_all_books:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ListAllBooksFragment()).commit();
+                        new ListAllBooksFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_search_book:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SearchBookFragment()).commit();
+                        new SearchBookFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_login:
                 handleLoginIntent();
@@ -94,31 +94,31 @@ public class AdminScreen extends AppCompatActivity implements
                 break;
             case R.id.nav_help:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HelpMenuFragment()).commit();
+                        new HelpMenuFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_contact_us:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ContactMenuFragment()).commit();
+                        new ContactMenuFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_add_book:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AddBookFragment()).commit();
+                        new AddBookFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_add_dept_admin:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AddDepartmentAdminFragment()).commit();
+                        new AddDepartmentAdminFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_user_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new UserProfileFragment()).commit();
+                        new UserProfileFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_change_password:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ChangePasswordFragment()).commit();
+                        new ChangePasswordFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_list_all_dept_admin:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ListAllDrtAdminsFragment()).commit();
+                        new ListAllDrtAdminsFragment()).addToBackStack(null).commit();
                 break;
         }
 
