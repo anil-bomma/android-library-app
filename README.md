@@ -61,8 +61,7 @@ To run this app we need internet.
 <h2>Layouts of our project:<h2>
    <ul>
  <h3>Splash Screeen:</h3>
-    
-     ![Alt text](/anil-bomma/android-library-app/Images/SplashScreen.png?raw=true "Image")
+![alt text](Images/SplashScreen.png)
   <p>
 The splash screen will be the launch page. This screen acts as a splash screen. A splash screen is usually used when a game or program is launching. In this app, a splash screen is used to launch the app and show it like a welcome screen.   
   </p>
