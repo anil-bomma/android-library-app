@@ -149,7 +149,7 @@ This privilege is only given to admins. Every time a new book imported, the book
   <p>
    The contact-us screen is used to display the details to contack in case of occurence of any queries. They can reach out to a person by through email or by calling the concerned person. An individual can re-direct to the concerned option required by clicking upon the displayed buttons. 
   </p>
-  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/ContactUsRedirectScreen.png" />
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/ContactUsRedirectScreen.PNG" />
   
   </ul>
   
