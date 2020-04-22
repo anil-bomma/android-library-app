@@ -34,6 +34,8 @@ public class UserRoleBasedNavigation {
             nav_menu.findItem(R.id.nav_list_all_dept_admin).setVisible(false);
             nav_menu.findItem(R.id.nav_add_book).setVisible(false);
             nav_menu.findItem(R.id.nav_setting).setVisible(false);
+            nav_menu.findItem(R.id.nav_borrow_books_list).setVisible(false);
+            nav_menu.findItem(R.id.nav_student_borrow_books_list).setVisible(false);
         }
     }
 
@@ -46,6 +48,8 @@ public class UserRoleBasedNavigation {
         nav_menu.findItem(R.id.nav_register).setVisible(false);
         nav_menu.findItem(R.id.nav_logout).setVisible(true);
         nav_menu.findItem(R.id.nav_setting).setVisible(true);
+        nav_menu.findItem(R.id.nav_student_borrow_books_list).setVisible(false);
+        nav_menu.findItem(R.id.nav_borrow_books_list).setVisible(true);
     }
 
     // navigation bar for setting the departmentAdmin user
@@ -57,6 +61,8 @@ public class UserRoleBasedNavigation {
         nav_menu.findItem(R.id.nav_register).setVisible(false);
         nav_menu.findItem(R.id.nav_logout).setVisible(true);
         nav_menu.findItem(R.id.nav_setting).setVisible(true);
+        nav_menu.findItem(R.id.nav_student_borrow_books_list).setVisible(false);
+        nav_menu.findItem(R.id.nav_borrow_books_list).setVisible(true);
     }
 
     // navigation bar for setting the student
@@ -68,5 +74,7 @@ public class UserRoleBasedNavigation {
         nav_menu.findItem(R.id.nav_register).setVisible(false);
         nav_menu.findItem(R.id.nav_logout).setVisible(true);
         nav_menu.findItem(R.id.nav_setting).setVisible(true);
+        nav_menu.findItem(R.id.nav_student_borrow_books_list).setVisible(true);
+        nav_menu.findItem(R.id.nav_borrow_books_list).setVisible(false);
     }
 }

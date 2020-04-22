@@ -107,7 +107,7 @@ public class RegisrationVerificationScreen extends AppCompatActivity {
                                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Log.d("db", "onSuccess: user Profile is created for "+ userID);
+                                                Log.d("db", "onSuccess: user Profile is created for " + userID);
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override

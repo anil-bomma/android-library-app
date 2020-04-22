@@ -1,8 +1,10 @@
 package com.example.android_library_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 public class BookDescriptionFragment extends Fragment {
 
     Button borrowBTN;
+    private BorrowBookFragment borrowBookFragment = new BorrowBookFragment();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +58,16 @@ public class BookDescriptionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("----------borrowBTN----------");
+                if(MainActivity.loginStatus==false){
+                    Intent intent = new Intent(getActivity().getApplication(),LoginActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.fragment_container, borrowBookFragment, "borrow book fragment");
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
             }
         });
 
