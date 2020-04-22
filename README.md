@@ -88,29 +88,69 @@ If the student/user is new to the application they need to register themselves i
    <h3>Home Screen:</h3>
   <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/ListAllBooks.png" />
   <p>
-The user will enter into home page of the application in which there are 2 buttons available one of them is book search and the other is reserve rooms.
+The user will enter into home page of the application. This screen will display the list of books available in our library app. By clicking upon that particular book, you will be re-directed to "About the Book" Screen.  
   </p>
   </ul>
+    <ul>
+   <h3>About the Book Screen:</h3>
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/AboutTheBook.png" />
+  <p>
+This screen is useful to know the in-depth information of that particular book. If the user is interested in borrowing the book, the user can click upon the BORROW BOOK Button. The borrow book button allocates the user to borrow a book as and when required. 
+  </p>
+  </ul>
+   <ul>
+   <h3>Navigation Screen:</h3>
+  <p>
+    The functionalities present in this app can be displayed in the navigation screen as displayed below. This navigation screen will be a basic screen which is displayed to the user of the book app.
+  </p>
+  
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/InitialFragment.PNG" />
+  
+   <p>
+The screen displayed below is the navigation screen which is to be available for the department admin. We are making sure that all of the functionalities which are available are available to only certain people.
+  </p>
+  
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/LoginAsAdmin.PNG" />
+ 
+  </ul>
   <ul>
-   <h3>Book search : </h3>
+   <h3>Book Search Screen : </h3>
   <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/SplashScreen.png" />
   <p>
 This screen will show up search option will be displayed on top of screen and the sections under it. Once the book needed is selected the section and the row in which the book is present is highlighted. 
   </p>
   </ul>
   <ul>
-   <h3>Profile:</h3>
-  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/ContactUsScreen.png" />
+   <h3>Profile Screen:</h3>
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/UserProfile.PNG" />
   <p>
 This page will show the details of the user/student which they have entered at the time of registration.
   </p>
   </ul>
   <ul>
-   <h3>Adding books:</h3>
-  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/AboutTheBook.png" />
+   <h3>Adding Books Screen:</h3>
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/AddingABook.PNG" />
   <p>
 This privilege is only given to admins. Every time a new book imported, the book details are entered by the admin. This page will contain all the edit text to add details of the book. The details will be stored in database.
   </p>
+  </ul>
+  
+   <ul>
+   <h3>Change Password Screen:</h3>
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/ChangePassword.PNG" />
+  <p>
+    If the person who has logged in desires to change the password, then the concerned person can do so in this page.
+  </p>
+  </ul>
+  
+   <ul>
+   <h3>Contact-Us Screen:</h3>
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/ContactUsScreen.png" />
+  <p>
+   The contact-us screen is used to display the details to contack in case of occurence of any queries. They can reach out to a person by through email or by calling the concerned person. An individual can re-direct to the concerned option required by clicking upon the displayed buttons. 
+  </p>
+  <img src="https://raw.githubusercontent.com/anil-bomma/android-library-app/master/Images/ContactUsRedirectScreen.PNG" />
+  
   </ul>
   
 
