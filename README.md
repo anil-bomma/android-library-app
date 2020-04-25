@@ -42,6 +42,25 @@ To run this app we need internet.
 </ul>
 </p>
 
+<h2>User Credentials for testing: </h2>
+  <p>
+  <ul>
+    Login as admin:
+UserID: s537157@nwmissouri.edu
+Password: 123456
+</ul>
+  <ul>
+    Login as Department Admin:
+UserID: s537240@nwmissouri.edu
+Password: 123456
+</ul>
+  <ul>
+    Login as Student:
+UserID: s536974@nwmissouri.edu
+Password: 123456
+</ul>
+</p>
+
 <h2>Sources used for our Project:</h2>
 
 <p>
