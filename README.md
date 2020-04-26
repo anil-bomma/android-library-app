@@ -176,7 +176,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
 
 <h3>Book description:</h3>
 <p>
-  In this page the detailed description of a particular book clicked or selected from the list will be displayed as shown below. If the user clicks on borrow book button and if the user is not logged in, the application will be redirected to login activity. Otherwise corresponding screen is shown in fig:
+  In this page the detailed description of a particular book clicked or selected from the list will be displayed as shown below. If the user clicks on borrow book button and if the user is not logged in, the application will be redirected to login activity. Otherwise corresponding screen is shown in fig: 17
 </p>
 <p align="center">
 <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_BookDescription.png" width="230" height="400"/>
