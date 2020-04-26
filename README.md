@@ -6,7 +6,7 @@ An android application which is used for searching and renting books from a libr
 
 <h2>App Logo<h2>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/appLogo.jpeg" width="230" height="200" />
+  <img src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/appLogo.jpeg" width="250" height="250" />
 </p>
   
 <h2>Team Members:</h2>
