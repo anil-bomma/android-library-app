@@ -151,44 +151,44 @@ public class ListAllBooksFragment extends Fragment {
 
         private Context context;
 
-//        @Override
-//        public boolean onSingleTapConfirmed(MotionEvent e) {
-//            View view = booksRV.findChildViewUnder(e.getX(), e.getY());
-//            if (view != null) {
-//                RecyclerView.ViewHolder holder = booksRV.getChildViewHolder(view);
-//
-//                if (holder instanceof BooksAdapter.BooksViewHolder) {
-//                    int position = holder.getAdapterPosition();
-//
-//                    //Obtaining the title of the book
-//                    BooksModel myModel = BooksModel.getSingleton();
-//                    bookTitle = myModel.booksArray.get(position).title;
-//                    bookAuthor = myModel.booksArray.get(position).author;
-//                    bookGenre = myModel.booksArray.get(position).genre;
-//                    bookAvailable = myModel.booksArray.get(position).available;
-//                    bookDescription = myModel.booksArray.get(position).description;
-//                    bookPublisher = myModel.booksArray.get(position).publisher;
-//                    bookLanguage = myModel.booksArray.get(position).language;
-//
-//
-//                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
-//
-//                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                    transaction.add(R.id.fragment_container, bookDescriptionFragment, "book description");
-//                    transaction.addToBackStack(null);
-//                    transaction.commit();
-//
-//                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                            new BookDescriptionFragment()).addToBackStack(null).commit();
-//
-//
-//                    // handling single tap.
-//                    Log.d("click", "clicked on item " + position);
-//                    return true;
-//                }
-//            }
-//            return false;
-//        }
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            View view = booksRV.findChildViewUnder(e.getX(), e.getY());
+            if (view != null) {
+                RecyclerView.ViewHolder holder = booksRV.getChildViewHolder(view);
+
+                if (holder instanceof BooksAdapter.BooksViewHolder) {
+                    int position = holder.getAdapterPosition();
+
+                    //Obtaining the title of the book
+                    BooksModel myModel = BooksModel.getSingletonWithDB(booksArray);
+                    bookTitle = myModel.booksArray.get(position).title;
+                    bookAuthor = myModel.booksArray.get(position).author;
+                    bookGenre = myModel.booksArray.get(position).genre;
+                    bookAvailable = myModel.booksArray.get(position).available;
+                    bookDescription = myModel.booksArray.get(position).description;
+                    bookPublisher = myModel.booksArray.get(position).publisher;
+                    bookLanguage = myModel.booksArray.get(position).language;
+
+
+                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
+
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    transaction.add(R.id.fragment_container, bookDescriptionFragment, "book description");
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new BookDescriptionFragment()).addToBackStack(null).commit();
+
+
+                    // handling single tap.
+                    Log.d("click", "clicked on item " + position);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     @Nullable
