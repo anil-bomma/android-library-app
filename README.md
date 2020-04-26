@@ -450,7 +450,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
   <br>Fig: 31
 </p>
 <p>
-  If the <b>REMOVE</b> is selected then thst person is removed from the list immediately.
+  If the <b>REMOVE</b> is selected then that person is removed from the list immediately and their role will be updated to student in the database immediately.
 </p>
 
  
