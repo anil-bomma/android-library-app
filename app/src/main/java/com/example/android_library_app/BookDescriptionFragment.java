@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class BookDescriptionFragment extends Fragment {
@@ -53,16 +54,16 @@ public class BookDescriptionFragment extends Fragment {
         String language = ListAllBooksFragment.bookLanguage;
         languageTV.setText(language);
 
+        // borrow book code
         borrowBTN = view.findViewById(R.id.borrowBTN);
         borrowBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("----------borrowBTN----------");
-                if(MainActivity.loginStatus==false){
-                    Intent intent = new Intent(getActivity().getApplication(),LoginActivity.class);
+                if (MainActivity.loginStatus == false) {
+                    Toast.makeText(getContext(), "Please login to borrow the book", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getActivity().getApplication(), LoginActivity.class);
                     startActivity(intent);
-                }
-                else {
+                } else {
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.add(R.id.fragment_container, borrowBookFragment, "borrow book fragment");
                     transaction.addToBackStack(null);
