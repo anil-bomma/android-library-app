@@ -1,5 +1,6 @@
 package com.example.android_library_app;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -7,11 +8,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +34,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 class SearchBooksModel {
-
-    private FirebaseFirestore db;
 
     public static class SearchBooksInfo {
         public String title;
@@ -60,51 +58,20 @@ class SearchBooksModel {
     }
 
     private static SearchBooksModel singleton = null;
+    public ArrayList<SearchBooksInfo> searchBooksArray;
 
-    public static SearchBooksModel getSingleton() {
+    public static SearchBooksModel getSingleton(ArrayList<SearchBooksInfo> booksArray) {
         if (singleton == null) {
-            singleton = new SearchBooksModel();
+            singleton = new SearchBooksModel(booksArray);
         }
         return singleton;
     }
 
-    public ArrayList<SearchBooksInfo> searchbooksArray;
 
-    private SearchBooksModel() {
-        searchbooksArray = new ArrayList<>();
-        db = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build();
-        db.setFirestoreSettings(settings);
-        loadModel();
+    private SearchBooksModel(ArrayList<SearchBooksInfo> booksArray) {
+        searchBooksArray = booksArray;
     }
 
-    public void loadModel() {
-        System.out.println("------------load model-----------");
-        db.collection("books").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Map<String, Object> book = document.getData();
-                                searchbooksArray.add(new SearchBooksInfo(
-                                        book.get("title").toString(),
-                                        book.get("author").toString(),
-                                        book.get("genre").toString(),
-                                        book.get("description").toString(),
-                                        book.get("publisher").toString(),
-                                        book.get("language").toString(),
-                                        book.get("available").toString()
-                                ));
-                            }
-                        } else {
-                            Log.w("ListAllBooks", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
 }
 
 
@@ -121,9 +88,8 @@ class SearchBooksAdapter extends RecyclerView.Adapter<SearchBooksAdapter.SearchB
 
     SearchBooksModel searchbooksModel;
 
-    public SearchBooksAdapter() {
-        super();
-        searchbooksModel = SearchBooksModel.getSingleton();
+    public SearchBooksAdapter(ArrayList<SearchBooksModel.SearchBooksInfo> booksArray) {
+        searchbooksModel = SearchBooksModel.getSingleton(booksArray);
     }
 
     @NonNull
@@ -138,29 +104,36 @@ class SearchBooksAdapter extends RecyclerView.Adapter<SearchBooksAdapter.SearchB
     @Override
     public void onBindViewHolder(@NonNull SearchBooksViewHolder holder, int position) {
         TextView bookName = holder.convienceViewReference.findViewById(R.id.bookName);
-        bookName.setText(searchbooksModel.searchbooksArray.get(position).title);
+        bookName.setText(searchbooksModel.searchBooksArray.get(position).title);
         TextView bookAuthor = holder.convienceViewReference.findViewById(R.id.bookAuthor);
-        bookAuthor.setText(searchbooksModel.searchbooksArray.get(position).author);
+        bookAuthor.setText(searchbooksModel.searchBooksArray.get(position).author);
         TextView bookEdition = holder.convienceViewReference.findViewById(R.id.bookEdition);
-        bookEdition.setText(searchbooksModel.searchbooksArray.get(position).publisher);
+        bookEdition.setText(searchbooksModel.searchBooksArray.get(position).publisher);
     }
 
     @Override
     public int getItemCount() {
-        return searchbooksModel.searchbooksArray.size();
+        return searchbooksModel.searchBooksArray.size();
     }
 }
 
 
 public class SearchBookFragment extends Fragment {
+
+    private FirebaseFirestore db;
+    private ArrayList<SearchBooksModel.SearchBooksInfo> booksArray;
+
+
     Button searchBTN;
     EditText searchBookET;
+    TextView searchResultTV;
+    ProgressBar searchProgressBar;
 
     // recycler view.
     private SearchBooksAdapter searchbooksAdapter = null;
     private RecyclerView searchbooksRV = null;
     private GestureDetectorCompat detector = null;
-    public static String bookTitle, bookAuthor, bookGenre, bookDescription, bookPublisher, bookLanguage, bookAvailable;
+    //    public static String bookTitle, bookAuthor, bookGenre, bookDescription, bookPublisher, bookLanguage, bookAvailable;
     private BookDescriptionFragment bookDescriptionFragment = new BookDescriptionFragment();
 
 
@@ -177,17 +150,17 @@ public class SearchBookFragment extends Fragment {
                     int position = holder.getAdapterPosition();
 
                     //Obtaining the title of the book
-                    SearchBooksModel myModel = SearchBooksModel.getSingleton();
-                    ListAllBooksFragment.bookTitle = myModel.searchbooksArray.get(position).title;
-                    ListAllBooksFragment.bookAuthor = myModel.searchbooksArray.get(position).author;
-                    ListAllBooksFragment.bookGenre = myModel.searchbooksArray.get(position).genre;
-                    ListAllBooksFragment.bookAvailable = myModel.searchbooksArray.get(position).available;
-                    ListAllBooksFragment.bookDescription = myModel.searchbooksArray.get(position).description;
-                    ListAllBooksFragment.bookPublisher = myModel.searchbooksArray.get(position).publisher;
-                    ListAllBooksFragment.bookLanguage = myModel.searchbooksArray.get(position).language;
+                    SearchBooksModel myModel = SearchBooksModel.getSingleton(booksArray);
+                    ListAllBooksFragment.bookTitle = myModel.searchBooksArray.get(position).title;
+                    ListAllBooksFragment.bookAuthor = myModel.searchBooksArray.get(position).author;
+                    ListAllBooksFragment.bookGenre = myModel.searchBooksArray.get(position).genre;
+                    ListAllBooksFragment.bookAvailable = myModel.searchBooksArray.get(position).available;
+                    ListAllBooksFragment.bookDescription = myModel.searchBooksArray.get(position).description;
+                    ListAllBooksFragment.bookPublisher = myModel.searchBooksArray.get(position).publisher;
+                    ListAllBooksFragment.bookLanguage = myModel.searchBooksArray.get(position).language;
 
 
-                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.add(R.id.fragment_container, bookDescriptionFragment, "book description");
@@ -196,7 +169,6 @@ public class SearchBookFragment extends Fragment {
 
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new BookDescriptionFragment()).addToBackStack(null).commit();
-
 
                     // handling single tap.
                     Log.d("click", "clicked on item " + position);
@@ -211,42 +183,103 @@ public class SearchBookFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_book, container, false);
 
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
 
-        // recycler view code.
-        searchbooksAdapter = new SearchBooksAdapter();
-        searchbooksRV = view.findViewById(R.id.mySearchBookRV);
-        searchbooksRV.setAdapter(searchbooksAdapter);
+        booksArray = new ArrayList<>();
 
-        bookDescriptionFragment = new BookDescriptionFragment();
-        RecyclerView.LayoutManager myManager = new LinearLayoutManager(view.getContext());
-        searchbooksRV.setLayoutManager(myManager);
+        final View view = inflater.inflate(R.layout.fragment_search_book, container, false);
 
-        detector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
+        searchProgressBar = view.findViewById(R.id.searchProgressBar);
+        searchBookET = view.findViewById(R.id.searchBookET);
+        searchResultTV = view.findViewById(R.id.searchResult);
+        searchResultTV.setVisibility(View.GONE);
 
-        searchbooksRV.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+        searchBTN = view.findViewById(R.id.searchBTN);
+        searchBTN.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return detector.onTouchEvent(e);
+            public void onClick(View v) {
+                searchResultTV.setVisibility(View.GONE);
+                searchProgressBar.setVisibility(View.VISIBLE);
+                booksArray.clear();
+                final String bookName = searchBookET.getText().toString().trim();
+
+                if (bookName == null || bookName.isEmpty()) {
+                    searchBookET.setError("Please enter the book name to search");
+                    Toast toast = Toast.makeText(getContext(),
+                            "Please enter book name and search..!",
+                            Toast.LENGTH_LONG);
+                    View toastView = toast.getView();
+                    toastView.setBackgroundColor(Color.parseColor("#F07878"));
+                    searchProgressBar.setVisibility(View.GONE);
+                    toast.show();
+                    return;
+                }
+
+                db.collection("books")
+                        .whereGreaterThan("title", bookName)
+                        .whereLessThan("title", bookName + "\uf8ff")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Map<String, Object> book = document.getData();
+                                        booksArray.add(new SearchBooksModel.SearchBooksInfo(
+                                                book.get("title").toString(),
+                                                book.get("author").toString(),
+                                                book.get("genre").toString(),
+                                                book.get("description").toString(),
+                                                book.get("publisher").toString(),
+                                                book.get("language").toString(),
+                                                book.get("available").toString()
+                                        ));
+                                    }
+
+                                    searchResultTV.setText(booksArray.size() +
+                                            " results found with given book name: '" + bookName + "'");
+                                    searchResultTV.setVisibility(View.VISIBLE);
+
+                                    // recycler view code.
+                                    searchbooksAdapter = new SearchBooksAdapter(booksArray);
+                                    searchbooksRV = view.findViewById(R.id.mySearchBookRV);
+                                    searchProgressBar.setVisibility(View.GONE);
+                                    searchbooksRV.setAdapter(searchbooksAdapter);
+
+                                    bookDescriptionFragment = new BookDescriptionFragment();
+                                    RecyclerView.LayoutManager myManager = new LinearLayoutManager(view.getContext());
+                                    searchbooksRV.setLayoutManager(myManager);
+
+                                    detector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
+
+                                    searchbooksRV.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+                                        @Override
+                                        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                                            return detector.onTouchEvent(e);
+                                        }
+                                    });
+
+                                } else {
+                                    Toast toast = Toast.makeText(getContext(),
+                                            "Error getting documents " + task.getException().getMessage(),
+                                            Toast.LENGTH_LONG);
+                                    View toastView = toast.getView();
+                                    toastView.setBackgroundColor(Color.parseColor("#F07878"));
+                                    searchProgressBar.setVisibility(View.GONE);
+                                    toast.show();
+                                    Log.w("ListAllBooks", "Error getting documents.", task.getException());
+                                }
+                            }
+                        });
+
             }
         });
 
-
-//        final AutoCompleteTextView searchBookET = (AutoCompleteTextView) view.findViewById(R.id.searchBookET);
-//        String[] books = getResources().getStringArray(R.array.book_names);
-//        ArrayAdapter<String> adapter =
-//                new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, books);
-//        searchBookET.setAdapter(adapter);
-//
-//        searchBTN = view.findViewById(R.id.searchBTN);
-//        searchBTN.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                searchBookET.getText();
-//                System.out.println("testing");
-//            }
-//        });
         return view;
     }
 }

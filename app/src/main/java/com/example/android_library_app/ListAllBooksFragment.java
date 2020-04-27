@@ -39,8 +39,6 @@ import java.util.Map;
 
 class BooksModel {
 
-//    private FirebaseFirestore db;
-
     public static class BooksInfo {
         public String title;
         public String author;
@@ -64,6 +62,7 @@ class BooksModel {
     }
 
     private static BooksModel singleton = null;
+    public ArrayList<BooksInfo> booksArray;
 
 
     public static BooksModel getSingletonWithDB(ArrayList<BooksInfo> booksArray) {
@@ -72,8 +71,6 @@ class BooksModel {
         }
         return singleton;
     }
-
-    public ArrayList<BooksInfo> booksArray;
 
     private BooksModel(ArrayList<BooksInfo> booksArray) {
         this.booksArray = booksArray;
