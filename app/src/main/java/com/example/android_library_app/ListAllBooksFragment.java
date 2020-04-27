@@ -1,7 +1,6 @@
 package com.example.android_library_app;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,9 +65,7 @@ class BooksModel {
 
 
     public static BooksModel getSingletonWithDB(ArrayList<BooksInfo> booksArray) {
-        if (singleton == null) {
-            singleton = new BooksModel(booksArray);
-        }
+        singleton = new BooksModel(booksArray);
         return singleton;
     }
 
@@ -81,6 +78,13 @@ class BooksModel {
 
 class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
 
+    BooksModel booksModel;
+
+    // parameterised constructor
+    public BooksAdapter(ArrayList<BooksModel.BooksInfo> booksArray) {
+        booksModel = BooksModel.getSingletonWithDB(booksArray);
+    }
+
     public static class BooksViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout convienceViewReference;
 
@@ -88,27 +92,6 @@ class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
             super(linearLayout);
             convienceViewReference = linearLayout;
         }
-    }
-
-    BooksModel booksModel;
-
-//    public BooksAdapter() {
-//        super();
-//        booksModel = BooksModel.getSingleton();
-//    }
-
-    // parameterised constructor
-    public BooksAdapter(ArrayList<BooksModel.BooksInfo> booksArray) {
-        booksModel = BooksModel.getSingletonWithDB(booksArray);
-    }
-
-    @NonNull
-    @Override
-    public BooksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_text_view, parent, false);
-        BooksViewHolder bVH = new BooksViewHolder(v);
-        return bVH;
     }
 
     @Override
@@ -119,6 +102,15 @@ class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHolder> {
         bookAuthor.setText(booksModel.booksArray.get(position).author);
         TextView bookEdition = holder.convienceViewReference.findViewById(R.id.bookEdition);
         bookEdition.setText(booksModel.booksArray.get(position).publisher);
+    }
+
+    @NonNull
+    @Override
+    public BooksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.recycler_text_view, parent, false);
+        BooksViewHolder bVH = new BooksViewHolder(v);
+        return bVH;
     }
 
     @Override
@@ -231,11 +223,13 @@ public class ListAllBooksFragment extends Fragment {
                             loadBooksBar.setVisibility(View.GONE);
                             booksAdapter = new BooksAdapter(booksArray);
                             booksRV = view.findViewById(R.id.myRV);
-                            booksRV.setAdapter(booksAdapter);
 
                             bookDescriptionFragment = new BookDescriptionFragment();
                             RecyclerView.LayoutManager myManager = new LinearLayoutManager(view.getContext());
                             booksRV.setLayoutManager(myManager);
+                            booksAdapter.notifyDataSetChanged();
+                            booksRV.setAdapter(booksAdapter);
+                            booksAdapter.notifyDataSetChanged();
 
                             detector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
 
