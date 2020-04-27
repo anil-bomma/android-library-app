@@ -1,12 +1,11 @@
 package com.example.android_library_app;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,8 +31,8 @@ import java.util.Map;
 public class AddBookFragment extends Fragment {
 
     Button addBookBTN;
-    EditText titleET, authorET, languageET, genreET, publisherET, descriptionET,availableET,sectionIDET;
-    //Spinner rackIDSP;
+    EditText titleET, authorET, languageET, genreET, publisherET, descriptionET, availableET, rackIDET;
+    Spinner sectionIDSP;
     private FirebaseFirestore db;
 
 
@@ -58,7 +56,6 @@ public class AddBookFragment extends Fragment {
                 try {
 
                     //the below line of code is just for testing
-                    System.out.println("This is just for testing");
                     titleET = fragmentAddBookView.findViewById(R.id.titleET);
                     authorET = fragmentAddBookView.findViewById(R.id.authorET);
                     languageET = fragmentAddBookView.findViewById(R.id.languageET);
@@ -66,8 +63,8 @@ public class AddBookFragment extends Fragment {
                     publisherET = fragmentAddBookView.findViewById(R.id.publisherET);
                     descriptionET = fragmentAddBookView.findViewById(R.id.descriptionET);
                     availableET = fragmentAddBookView.findViewById(R.id.availableET);
-                   // rackIDSP= fragmentAddBookView.findViewById(R.id.rackIDSP);
-                    sectionIDET=fragmentAddBookView.findViewById(R.id.sectionIDET);
+                    rackIDET = fragmentAddBookView.findViewById(R.id.rackIDET);
+                    sectionIDSP = fragmentAddBookView.findViewById(R.id.sectionIDSP);
 
                     String title = titleET.getText().toString().trim();
                     String author = authorET.getText().toString().trim();
@@ -76,25 +73,19 @@ public class AddBookFragment extends Fragment {
                     String publisher = publisherET.getText().toString().trim();
                     String description = descriptionET.getText().toString().trim();
                     String available = availableET.getText().toString().trim();
-                    String sectionID = sectionIDET.getText().toString().trim();
-
-//                    String description = "description";
-//                    String available = "5";
+                    String sectionID = sectionIDSP.getSelectedItem().toString();
+                    String rackId = rackIDET.getText().toString().trim();
 
                     if (description.isEmpty()) {
                         description = String.format("%s by %s", title, author);
                     }
 
-                    //Assigning the sectionID to 1 if the text-field is empty
-                    if(sectionID.isEmpty()){
-                        sectionID="1";
-                    }
-
                     // validate and save book in db
-                    validateBook(title, author, language, genre, publisher, available, description, sectionID);
+                    validateBook(title, author, language, genre, publisher, available,
+                            rackId, description, sectionID);
 
                 } catch (Exception e) {
-                    System.out.println("error: "+e);
+                    System.out.println("error: " + e);
                 }
             }
         });
@@ -102,28 +93,38 @@ public class AddBookFragment extends Fragment {
         return fragmentAddBookView;
     }
 
-    public void validateBook(final String title, final String author, final String language, final String genre,
-                             final String publisher, final String available, final String description, final String sectionID) {
+    public void validateBook(final String title, final String author, final String language,
+                             final String genre, final String publisher, final String available,
+                             final String rackId, final String description, final String sectionID) {
 
         if (title.isEmpty()) {
             titleET.setError("please enter the title");
+            return;
         }
         if (author.isEmpty()) {
             authorET.setError("please enter the author name");
+            return;
         }
         if (language.isEmpty()) {
             languageET.setError("please enter the language");
+            return;
         }
         if (genre.isEmpty()) {
             genreET.setError("please enter the genre");
+            return;
         }
         if (publisher.isEmpty()) {
             publisherET.setError("please enter the publisher name");
+            return;
         }
         if (available.isEmpty()) {
             availableET.setError("please enter the total book count");
+            return;
         }
-
+        if (rackId.isEmpty()) {
+            rackIDET.setError("please enter the rack id");
+            return;
+        }
 
 
         try {
@@ -139,11 +140,14 @@ public class AddBookFragment extends Fragment {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     bookExist = true;
                                 }
+
                                 if (bookExist) {
                                     titleET.setError("book already exist with the same name");
+                                    return;
                                 } else {
                                     saveBook(title, author, language, genre, publisher, available, description, sectionID);
                                 }
+
                             } else {
                                 Log.d("addBookFragment", "Error getting documents: ", task.getException());
                             }
@@ -166,7 +170,7 @@ public class AddBookFragment extends Fragment {
             book.put("publisher", publisher);
             book.put("description", description);
             book.put("available", available);
-            book.put("sectionID",sectionID);
+            book.put("sectionID", sectionID);
 
             // Add a new document with a generated ID
             db.collection("books")
@@ -182,12 +186,15 @@ public class AddBookFragment extends Fragment {
                             publisherET.setText("");
                             descriptionET.setText("");
                             availableET.setText("");
-                            sectionIDET.setText("");
-                            Toast.makeText(
+                            rackIDET.setText("");
+                            Toast toast = Toast.makeText(
                                     AddBookFragment.super.getContext(),
                                     "Book added successfully",
                                     Toast.LENGTH_LONG
-                            ).show();
+                            );
+                            View toastView = toast.getView();
+                            toastView.setBackgroundColor(Color.parseColor("#79E87E"));
+                            toast.show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

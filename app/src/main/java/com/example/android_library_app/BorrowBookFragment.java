@@ -1,6 +1,5 @@
 package com.example.android_library_app;
 
-import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -38,7 +37,7 @@ public class BorrowBookFragment extends Fragment {
 
     TextView borrowBookName, borrowBookLocation, borrowBookDate, borrowBookReturnDate;
     Button borrowBookBTN;
-//    static String studentID;
+    private FirebaseAuth fAuth;
     private FirebaseFirestore db;
 
 
