@@ -61,9 +61,7 @@ class SearchBooksModel {
     public ArrayList<SearchBooksInfo> searchBooksArray;
 
     public static SearchBooksModel getSingleton(ArrayList<SearchBooksInfo> booksArray) {
-        if (singleton == null) {
-            singleton = new SearchBooksModel(booksArray);
-        }
+        singleton = new SearchBooksModel(booksArray);
         return singleton;
     }
 
@@ -133,7 +131,6 @@ public class SearchBookFragment extends Fragment {
     private SearchBooksAdapter searchbooksAdapter = null;
     private RecyclerView searchbooksRV = null;
     private GestureDetectorCompat detector = null;
-    //    public static String bookTitle, bookAuthor, bookGenre, bookDescription, bookPublisher, bookLanguage, bookAvailable;
     private BookDescriptionFragment bookDescriptionFragment = new BookDescriptionFragment();
 
 
@@ -221,8 +218,8 @@ public class SearchBookFragment extends Fragment {
                 }
 
                 db.collection("books")
-                        .whereGreaterThan("title", bookName)
-                        .whereLessThan("title", bookName + "\uf8ff")
+                        .whereGreaterThanOrEqualTo("title", bookName)
+                        .whereLessThanOrEqualTo("title", bookName + "\uf8ff")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -276,7 +273,6 @@ public class SearchBookFragment extends Fragment {
                                 }
                             }
                         });
-
             }
         });
 
