@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_ground"
@@ -11,39 +9,41 @@
         android:id="@+id/borrowBookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="20dp"
         android:text="Book Name"
-        android:textStyle="bold|italic"
         android:textColor="@color/black"
         android:textSize="25dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_gravity="center"/>
+        android:textStyle="bold|italic" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Book location: "
-            android:textStyle="normal|bold"
             android:layout_marginStart="15dp"
+            android:text="Book location: "
             android:textColor="@color/black"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:textStyle="normal|bold" />
+
         <TextView
             android:id="@+id/borrowBookLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Book location "
             android:layout_marginStart="10dp"
-            android:textStyle="italic"
+            android:text="Book location "
             android:textColor="@color/black"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:textStyle="italic" />
     </LinearLayout>
 
 
@@ -51,26 +51,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Borrow Date: "
-        android:textStyle="normal|bold"
-        android:layout_marginStart="15dp"
-        android:textColor="@color/black"
-        android:textSize="20dp"/>
-    <TextView
-        android:id="@+id/borrowBookDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Borrow Date: "
-        android:layout_marginStart="22dp"
-        android:textStyle="italic"
-        android:textColor="@color/black"
-        android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Borrow Date: "
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/borrowBookDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:text="Borrow Date: "
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="italic" />
     </LinearLayout>
 
 
@@ -78,49 +80,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return Date: "
-        android:textStyle="normal|bold"
-        android:layout_marginStart="15dp"
-        android:textColor="@color/black"
-        android:textSize="20dp"/>
-    <TextView
-        android:id="@+id/borrowBookReturnDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return Date: "
-        android:textStyle="italic"
-        android:textColor="@color/black"
-        android:layout_marginStart="27dp"
-        android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Return Date: "
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/borrowBookReturnDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:text="Return Date: "
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="italic" />
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:text="Note: Late charges will be included if the book is not returned by the date mentioned."
-        android:textStyle="italic"
-        android:textColor="@android:color/holo_red_light"
+        android:layout_gravity="bottom"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_gravity="bottom"
-        android:textSize="15dp"/>
+        android:layout_marginBottom="5dp"
+        android:gravity="bottom"
+        android:text="Note: Late charges will be included if the book is not returned by the date mentioned."
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="15dp"
+        android:textStyle="italic" />
 
     <Button
         android:id="@+id/borrowBookBTN"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_back_ground"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:textSize="20dp"
-        android:text="Borrow"/>
+        android:background="@drawable/button_back_ground"
+        android:text="Confirm"
+        android:textSize="20dp" />
 
 </LinearLayout>
