@@ -151,6 +151,9 @@ public class AdminScreen extends AppCompatActivity implements
     // logout intent will be executed
     public void handleLogoutIntent() {
         MainActivity.loginStatus = false;
+        MainActivity.userRole = "";
+        MainActivity.user919 = "";
+        MainActivity.userName = null;
         fAuth.signOut();
         navSetting.setNavigation(AdminScreen.this, "", "");
         Toast.makeText(AdminScreen.this, "Logged Out..!!", Toast.LENGTH_SHORT).show();
