@@ -1,5 +1,6 @@
 package com.example.android_library_app;
 
+import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +37,9 @@ import java.util.Map;
 
 public class BorrowBookFragment extends Fragment {
 
-    TextView borrowBookName, borrowBookLocation, borrowBookDate, borrowBookReturnDate;
+    TextView borrowBookName, borrowBookLocation, borrowBookDate, borrowBookReturnDate, bookAvailableTV;
     Button borrowBookBTN;
-    private FirebaseAuth fAuth;
+    public static ProgressBar borrowLoaderPB;
     private FirebaseFirestore db;
 
 
@@ -48,13 +50,22 @@ public class BorrowBookFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_borrow_book, container, false);
 
+        borrowLoaderPB = view.findViewById(R.id.borrowLoaderPB);
+
         //today's date
-        String currentDate = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date());
+        final String currentDate = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date());
 
         final String bName = ListAllBooksFragment.bookTitle;
+        final int count = Integer.parseInt(ListAllBooksFragment.bookAvailable);
         borrowBookName = view.findViewById(R.id.borrowBookName);
-        borrowBookName.setText(bName);
+        borrowBookName.setText(ListAllBooksFragment.bookTitle);
 
+        borrowBookLocation = view.findViewById(R.id.borrowBookLocation);
+        borrowBookLocation.setText("Section: " + ListAllBooksFragment.bookSection + ", Rack Id: "
+                + ListAllBooksFragment.bookRack);
+
+        bookAvailableTV = view.findViewById(R.id.bookAvailableTV);
+        bookAvailableTV.setText("" + count);
 
         borrowBookDate = view.findViewById(R.id.borrowBookDate);
         borrowBookDate.setText(currentDate);
@@ -69,7 +80,7 @@ public class BorrowBookFragment extends Fragment {
             e.printStackTrace();
         }
         calendar.add(Calendar.DATE, 30);
-        String returnDate = new SimpleDateFormat("MM-dd-yyyy").format(calendar.getTime());
+        final String returnDate = new SimpleDateFormat("MM-dd-yyyy").format(calendar.getTime());
 
         borrowBookReturnDate = view.findViewById(R.id.borrowBookReturnDate);
         borrowBookReturnDate.setText(returnDate);
@@ -82,22 +93,31 @@ public class BorrowBookFragment extends Fragment {
                 .build();
         db.setFirestoreSettings(settings);
 
-
-        // adding book data.
-        final Map<String, Object> borrowedBook = new HashMap<>();
-        borrowedBook.put("userID", MainActivity.user919);
-        borrowedBook.put("bookName", bName);
-        borrowedBook.put("borrowDate", currentDate);
-        borrowedBook.put("returnDate", returnDate);
-
-        System.out.println("---------borrowedBook" + borrowedBook);
-
         // on button click.
         borrowBookBTN = view.findViewById(R.id.borrowBookBTN);
         borrowBookBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("-------------Button Clicked -----------");
+                borrowLoaderPB.setVisibility(View.VISIBLE);
+                if (count < 1) {
+                    borrowBookDate.setText("Not Available");
+                    borrowBookReturnDate.setText("Not Available");
+                    Toast toast = Toast.makeText(getContext(),
+                            "Sorry, this book is not available for now..",
+                            Toast.LENGTH_LONG);
+                    View toastView = toast.getView();
+                    toastView.setBackgroundColor(Color.parseColor("#F07878"));
+                    toast.show();
+                    borrowLoaderPB.setVisibility(View.INVISIBLE);
+                    return;
+                }
+
+                // adding book data in borrowed book collection.
+                final Map<String, Object> borrowedBook = new HashMap<>();
+                borrowedBook.put("userID", MainActivity.user919);
+                borrowedBook.put("bookName", bName);
+                borrowedBook.put("borrowDate", currentDate);
+                borrowedBook.put("returnDate", returnDate);
 
                 db.collection("borrowedBooks").
                         whereEqualTo("userID", MainActivity.user919).
@@ -111,12 +131,19 @@ public class BorrowBookFragment extends Fragment {
                                 alreadyBorrowed = true;
                             }
                             if (alreadyBorrowed) {
-                                Toast.makeText(getActivity(), "Book already Borrowed ..!!", Toast.LENGTH_SHORT).show();
+                                Toast toast = Toast.makeText(getContext(),
+                                        "You have already borrowed this book..!!.",
+                                        Toast.LENGTH_LONG);
+                                View toastView = toast.getView();
+                                toastView.setBackgroundColor(Color.parseColor("#F07878"));
+                                borrowLoaderPB.setVisibility(View.INVISIBLE);
+                                toast.show();
                             } else {
                                 borrowBook(borrowedBook);
                             }
                         } else {
-                            Toast.makeText(getActivity(), "Error...!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Database Error...!!", Toast.LENGTH_SHORT).show();
+                            borrowLoaderPB.setVisibility(View.INVISIBLE);
                         }
                     }
                 });
@@ -125,18 +152,56 @@ public class BorrowBookFragment extends Fragment {
         return view;
     }
 
-    private void borrowBook(Map<String, Object> borrowedBook) {
-        db.collection("borrowedBooks").
-                add(borrowedBook).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(getActivity(), "Borrowed Successfully..!!", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Book Borrowed Failed..!!", Toast.LENGTH_SHORT).show();
-            }
-        });
+    private void borrowBook(final Map<String, Object> borrowedBook) {
+
+        db.collection("books")
+                .whereEqualTo("title", borrowedBook.get("bookName"))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> book = document.getData();
+                                int newCount = Integer.parseInt(book.get("available") + "") - 1;
+                                book.put("available", newCount);
+                                db.collection("books")
+                                        .document(document.getId())
+                                        .update(book);
+                            }
+
+                            db.collection("borrowedBooks")
+                                    .add(borrowedBook)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast toast = Toast.makeText(getContext(),
+                                                    "Reserved successfully, Please go to help desk and collect you book..!!",
+                                                    Toast.LENGTH_LONG);
+                                            View toastView = toast.getView();
+                                            toastView.setBackgroundColor(Color.parseColor("#79E87E"));
+                                            toast.show();
+                                            BorrowBookFragment.borrowLoaderPB.setVisibility(View.INVISIBLE);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getActivity(), "Book Borrowed Failed..!!", Toast.LENGTH_SHORT).show();
+                                    BorrowBookFragment.borrowLoaderPB.setVisibility(View.INVISIBLE);
+                                }
+                            });
+                        } else {
+                            Toast toast = Toast.makeText(getContext(),
+                                    "Database, error getting documents",
+                                    Toast.LENGTH_LONG);
+                            View toastView = toast.getView();
+                            toastView.setBackgroundColor(Color.parseColor("#F07878"));
+                            toast.show();
+                            BorrowBookFragment.borrowLoaderPB.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
+
     }
 }
