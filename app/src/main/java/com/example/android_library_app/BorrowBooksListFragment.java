@@ -1,5 +1,7 @@
 package com.example.android_library_app;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -7,14 +9,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,6 +69,8 @@ class BorrowedBooksModel {
 
 class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdapter.BorrowedBooksViewHolder> {
 
+    private FirebaseFirestore db;
+
     public static class BorrowedBooksViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout convienceViewReference;
 
@@ -84,19 +91,72 @@ class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdapter.Bor
     @Override
     public BorrowedBooksViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_text_view, parent, false);
+                .inflate(R.layout.recycler_borrowed_book, parent, false);
         BorrowedBooksViewHolder bVH = new BorrowedBooksViewHolder(v);
         return bVH;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BorrowedBooksViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final BorrowedBooksViewHolder holder, final int position) {
         TextView borrowedBookName = holder.convienceViewReference.findViewById(R.id.bookName);
         borrowedBookName.setText(borrowedBooksModel.borrowedbooksArray.get(position).borrowedBookName);
         TextView user919 = holder.convienceViewReference.findViewById(R.id.bookAuthor);
         user919.setText(borrowedBooksModel.borrowedbooksArray.get(position).borrowedStudentId);
         TextView returnDate = holder.convienceViewReference.findViewById(R.id.bookEdition);
         returnDate.setText(borrowedBooksModel.borrowedbooksArray.get(position).borrowedBookReturnedDate);
+
+        // return book
+        Button returnBook = holder.convienceViewReference.findViewById(R.id.bookReturnBTN);
+        if (MainActivity.userRole.equalsIgnoreCase("student")) {
+            returnBook.setVisibility(View.GONE);
+        } else {
+            returnBook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    db = FirebaseFirestore.getInstance();
+                    FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                            .setTimestampsInSnapshotsEnabled(true)
+                            .build();
+                    db.setFirestoreSettings(settings);
+
+                    final BorrowedBooksModel.BorrowedBooksInfo borrowedBook = borrowedBooksModel.borrowedbooksArray.get(position);
+
+                    String bookName = borrowedBook.borrowedBookName;
+                    String userId = borrowedBook.borrowedStudentId;
+
+                    db.collection("borrowedBooks")
+                            .whereEqualTo("userID", userId)
+                            .whereEqualTo("bookName", bookName)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Map<String, Object> borrowedBook = document.getData();
+                                            borrowedBook.put("return", "true");
+                                            db.collection("borrowedBooks")
+                                                    .document(document.getId())
+                                                    .update(borrowedBook);
+                                        }
+                                        BorrowBooksListFragment.borrowedBooksList.remove(borrowedBook);
+                                        BorrowBooksListFragment.borrowedbooksAdapter.notifyDataSetChanged();
+
+                                        Toast toast = Toast.makeText(BorrowBooksListFragment.context,
+                                                "Record updated, Please collect the book...!",
+                                                Toast.LENGTH_LONG);
+                                        View toastView = toast.getView();
+                                        toastView.setBackgroundColor(
+                                                Color.parseColor("#79E87E"));
+                                        toast.show();
+                                    }
+                                }
+                            });
+                }
+            });
+        }
+
+
     }
 
     @Override
@@ -108,9 +168,10 @@ class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdapter.Bor
 public class BorrowBooksListFragment extends Fragment {
 
     private FirebaseFirestore db;
+    public static FragmentActivity context;
 
-    private BorrowedBooksAdapter borrowedbooksAdapter = null;
-    private ArrayList<BorrowedBooksModel.BorrowedBooksInfo> borrowedBooksList;
+    public static BorrowedBooksAdapter borrowedbooksAdapter = null;
+    public static ArrayList<BorrowedBooksModel.BorrowedBooksInfo> borrowedBooksList;
     private RecyclerView borrowedBookRV = null;
     private GestureDetectorCompat detector = null;
     ProgressBar borrowBookPB;
@@ -145,6 +206,8 @@ public class BorrowBooksListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_borrowed_books_list, container, false);
 
+        context = getActivity();
+
         db = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)
@@ -158,7 +221,8 @@ public class BorrowBooksListFragment extends Fragment {
         Query collection;
         if (MainActivity.userRole.equalsIgnoreCase("student")) {
             collection = db.collection("borrowedBooks")
-                    .whereEqualTo("userID", MainActivity.user919);
+                    .whereEqualTo("userID", MainActivity.user919)
+                    .whereEqualTo("return", "false");
         } else {
             collection = db.collection("borrowedBooks");
         }
