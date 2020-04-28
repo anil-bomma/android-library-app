@@ -171,6 +171,7 @@ public class BorrowBookFragment extends Fragment {
                                         .update(book);
                             }
 
+                            borrowedBook.put("return", "false");
                             db.collection("borrowedBooks")
                                     .add(borrowedBook)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
