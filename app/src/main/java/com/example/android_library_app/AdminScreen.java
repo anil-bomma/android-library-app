@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -22,6 +24,7 @@ public class AdminScreen extends AppCompatActivity implements
 //        SearchPersonFragment.SearchListener {
 
     private DrawerLayout drawer;
+    public static View navHeader;
     public static Menu nav_menu;
     UserRoleBasedNavigation navSetting = new UserRoleBasedNavigation();
 
@@ -51,6 +54,12 @@ public class AdminScreen extends AppCompatActivity implements
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        navHeader = navigationView.getHeaderView(0);
+        if (MainActivity.userName != null && MainActivity.userName.length() > 0) {
+            setProfileName("Hello " + MainActivity.userName + ",");
+        }
+
         navigationView.setNavigationItemSelectedListener(AdminScreen.this);
         navigationView.bringToFront();
 
@@ -64,11 +73,16 @@ public class AdminScreen extends AppCompatActivity implements
                     new ListAllBooksFragment()).addToBackStack(null).commit();
             navigationView.setCheckedItem(R.id.nav_list_all_books);
 
-
-//            FragmentManager fm = getSupportFragmentManager();
-//            searchPersonFragment = (SearchPersonFragment) fm.findFragmentByTag("orderFR");
             return;
         }
+
+    }
+
+    public static void setProfileName(String userName) {
+        TextView nameTV;
+        nameTV = navHeader.findViewById(R.id.nameTV);
+        nameTV.setText(userName);
+        nameTV.setVisibility(View.VISIBLE);
     }
 
     @Override

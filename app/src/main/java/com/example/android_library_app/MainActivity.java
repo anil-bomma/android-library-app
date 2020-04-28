@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 public class MainActivity extends AppCompatActivity {
 
     public static boolean loginStatus = false;
-    public static String userId, user919;
+    public static String userId, user919, userName;
     public static String userRole = "admin";
 
     private FirebaseFirestore db;
@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 userRole = documentSnapshot.getString("role");
-                user919 =  documentSnapshot.getString("studentId");
+                user919 = documentSnapshot.getString("studentId");
+                userName = documentSnapshot.getString("firstname");
 
                 Intent userScreen = new Intent(MainActivity.this, AdminScreen.class);
                 userScreen.putExtra("userId", userId);
