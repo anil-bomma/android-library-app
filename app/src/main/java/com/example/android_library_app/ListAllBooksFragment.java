@@ -46,10 +46,13 @@ class BooksModel {
         public String description;
         public String publisher;
         public String language;
+        public String sectionID;
+        public String rackID;
 
 
         public BooksInfo(String title, String author, String genre, String description,
-                         String publisher, String language, String available) {
+                         String publisher, String language, String available, String sectionID,
+                         String rackID) {
             this.title = title;
             this.author = author;
             this.genre = genre;
@@ -57,6 +60,8 @@ class BooksModel {
             this.description = description;
             this.publisher = publisher;
             this.language = language;
+            this.sectionID = sectionID;
+            this.rackID = rackID;
         }
     }
 
@@ -131,8 +136,8 @@ public class ListAllBooksFragment extends Fragment {
     private BooksAdapter booksAdapter = null;
     private RecyclerView booksRV = null;
     private GestureDetectorCompat detector = null;
-    public static String bookTitle, bookAuthor, bookGenre, bookDescription, bookPublisher, bookLanguage, bookAvailable;
-    //    public static int bookAvailable;
+    public static String bookTitle, bookAuthor, bookGenre, bookDescription, bookPublisher,
+            bookLanguage, bookAvailable, bookSection, bookRack;
     private BookDescriptionFragment bookDescriptionFragment = new BookDescriptionFragment();
 
     //gesture listener
@@ -158,7 +163,8 @@ public class ListAllBooksFragment extends Fragment {
                     bookDescription = myModel.booksArray.get(position).description;
                     bookPublisher = myModel.booksArray.get(position).publisher;
                     bookLanguage = myModel.booksArray.get(position).language;
-
+                    bookSection = myModel.booksArray.get(position).sectionID;
+                    bookRack = myModel.booksArray.get(position).rackID;
 
                     Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
 
@@ -208,6 +214,7 @@ public class ListAllBooksFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> book = document.getData();
+                                System.out.println(book);
                                 booksArray.add(new BooksModel.BooksInfo(
                                         book.get("title").toString(),
                                         book.get("author").toString(),
@@ -215,7 +222,9 @@ public class ListAllBooksFragment extends Fragment {
                                         book.get("description").toString(),
                                         book.get("publisher").toString(),
                                         book.get("language").toString(),
-                                        book.get("available").toString()
+                                        book.get("available").toString(),
+                                        book.get("sectionID").toString(),
+                                        book.get("rackID").toString()
                                 ));
                             }
 

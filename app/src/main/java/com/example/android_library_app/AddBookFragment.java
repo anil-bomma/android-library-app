@@ -145,7 +145,8 @@ public class AddBookFragment extends Fragment {
                                     titleET.setError("book already exist with the same name");
                                     return;
                                 } else {
-                                    saveBook(title, author, language, genre, publisher, available, description, sectionID);
+                                    saveBook(title, author, language, genre, publisher, available,
+                                            description, sectionID, rackId);
                                 }
 
                             } else {
@@ -159,7 +160,7 @@ public class AddBookFragment extends Fragment {
     }
 
     public void saveBook(String title, String author, String language, String genre,
-                         String publisher, String available, String description, String sectionID) {
+                         String publisher, String available, String description, String sectionID, String rackID) {
         try {
             // Create a new user with a first and last name
             Map<String, Object> book = new HashMap<>();
@@ -171,6 +172,7 @@ public class AddBookFragment extends Fragment {
             book.put("description", description);
             book.put("available", available);
             book.put("sectionID", sectionID);
+            book.put("rackID", rackID);
 
             // Add a new document with a generated ID
             db.collection("books")
