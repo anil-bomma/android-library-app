@@ -120,10 +120,6 @@ public class AdminScreen extends AppCompatActivity implements
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ListAllDrtAdminsFragment()).addToBackStack(null).commit();
                 break;
-            case R.id.nav_student_borrow_books_list:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new StudentBorrowedBooksListFragment()).addToBackStack(null).commit();
-                break;
             case R.id.nav_borrow_books_list:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new BorrowBooksListFragment()).addToBackStack(null).commit();
