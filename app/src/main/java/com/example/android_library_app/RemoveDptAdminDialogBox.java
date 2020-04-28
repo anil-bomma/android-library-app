@@ -1,7 +1,6 @@
 package com.example.android_library_app;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -10,39 +9,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
 
     private FirebaseFirestore db;
-    private CollectionReference userRef;
-//    private DptAdminAdapter dptAdminAdapter = null;
-//    private DialogListener dialogListener;
-//
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//    }
+    private ArrayList<DptAdminModel.DptAdminInfo> dptAdminArray;
+    private DptAdminAdapter dptAdminAdapter;
+
+    public RemoveDptAdminDialogBox(DptAdminAdapter dptAdminAdapter,
+                                   ArrayList<DptAdminModel.DptAdminInfo> dptAdminArray) {
+        this.dptAdminAdapter = dptAdminAdapter;
+        this.dptAdminArray = dptAdminArray;
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-//        dptAdminAdapter = new DptAdminAdapter();
         builder.setTitle("Delete");
 
         builder.setMessage("Do you want to remove this person as department Admin");
@@ -52,10 +46,10 @@ public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getActivity(), " This persons role is changed from department " +
                         "admin to normal user." + which, Toast.LENGTH_SHORT).show();
-                System.out.println("-----ListAllDrtAdminsFragment" + ListAllDrtAdminsFragment.KEY_DptAdmin919);
-                updateUserRole(ListAllDrtAdminsFragment.KEY_DptAdmin919);
-//                dialogListener.callBackDialog();
-////                dptAdminAdapter.notifyDataSetChanged();
+                System.out.println("-----ListAllDrtAdminsFragment" + ListAllDrtAdminsFragment.KEY_DptAdmin);
+                dptAdminArray.remove(ListAllDrtAdminsFragment.KEY_DptAdmin);
+                dptAdminAdapter.notifyDataSetChanged();
+                updateUserRole(ListAllDrtAdminsFragment.KEY_DptAdmin.dpt_919);
             }
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -66,15 +60,6 @@ public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
         });
         return builder.create();
     }
-//
-//    // trying
-//    public interface DialogListener {
-//        void callBackDialog();
-//    }
-//
-//
-//
-
 
     private void updateUserRole(final String dptAdmin919) {
         db = FirebaseFirestore.getInstance();
@@ -83,21 +68,17 @@ public class RemoveDptAdminDialogBox extends AppCompatDialogFragment {
                 .build();
         db.setFirestoreSettings(settings);
         final CollectionReference userRef = db.collection("users");
-        userRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        Map<String, Object> userData = document.getData();
-                        if (document.getData().get("studentId").toString().equals(dptAdmin919)) {
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("role", "student");
-                            userRef.document(document.getId()).set(user, SetOptions.merge());
-//                            dptAdminAdapter.notifyDataSetChanged();
+        userRef.whereEqualTo("studentId", dptAdmin919)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                userRef.document(document.getId()).update("role", "student");
+                            }
                         }
                     }
-                }
-            }
-        });
+                });
     }
 }
