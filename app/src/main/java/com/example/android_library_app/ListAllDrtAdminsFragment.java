@@ -1,7 +1,5 @@
 package com.example.android_library_app;
 
-import android.app.Activity;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -10,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 class DptAdminModel {
-    private FirebaseFirestore db;
 
     public static class DptAdminInfo {
         public String dptAdminName;
@@ -49,51 +46,15 @@ class DptAdminModel {
 
     private static DptAdminModel singleton = null;
 
-    public static DptAdminModel getSingleton() {
-        if (singleton == null) {
-            singleton = new DptAdminModel();
-        }
+    public static DptAdminModel getSingleton(ArrayList<DptAdminModel.DptAdminInfo> deptArray) {
+        singleton = new DptAdminModel(deptArray);
         return singleton;
     }
 
-    public ArrayList<DptAdminInfo> dptAdminArray;
+    public static ArrayList<DptAdminInfo> dptAdminArray;
 
-    private DptAdminModel() {
-        dptAdminArray = new ArrayList<>();
-        db = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build();
-        db.setFirestoreSettings(settings);
-        loadModel();
-    }
-
-    public void loadModel() {
-        db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Map<String, Object> user = document.getData();
-                        if (user.get("role").toString().equals("departmentAdmin")) {
-                            dptAdminArray.add(new DptAdminInfo(
-                                    user.get("firstname").toString() + " " + user.get("lastname").toString(),
-                                    user.get("studentId").toString(),
-                                    user.get("emailId").toString()
-                            ));
-                        }
-                    }
-                } else {
-                    Log.w("ListAllBooks", "Error getting documents.", task.getException());
-                }
-            }
-        });
-
-//        dptAdminArray.add(new DptAdminInfo("Mahender Reddy Surkanti", "919585353", "Politics & Business"));
-//        dptAdminArray.add(new DptAdminInfo("Anil Bomma", "919000000", "Applied Computer Science "));
-//        dptAdminArray.add(new DptAdminInfo("Deepthi Tejaswani Chokka ", "919000000", "Information Systems"));
-//        dptAdminArray.add(new DptAdminInfo("Rethimareddy Polam", "919584780", "Arts and Science"));
-
+    private DptAdminModel(ArrayList<DptAdminModel.DptAdminInfo> deptArray) {
+        dptAdminArray = deptArray;
     }
 }
 
@@ -124,16 +85,12 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
     private MyOnClick myOnClick;
     DptAdminModel dptAdminModel;
 
-    public DptAdminAdapter(MyOnClick myOnClick) {
+    public DptAdminAdapter(MyOnClick myOnClick, ArrayList<DptAdminModel.DptAdminInfo> deptArray) {
         super();
         this.myOnClick = myOnClick;
-        dptAdminModel = DptAdminModel.getSingleton();
+        dptAdminModel = DptAdminModel.getSingleton(deptArray);
     }
 
-//    public DptAdminAdapter() {
-//        super();
-//        dptAdminModel = DptAdminModel.getSingleton();
-//    }
     @NonNull
     @Override
     public DptAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -164,28 +121,26 @@ class DptAdminAdapter extends RecyclerView.Adapter<DptAdminAdapter.DptAdminViewH
 }
 
 
-public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapter.MyOnClick
-//        , RemoveDptAdminDialogBox.DialogListener
-    {
+public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapter.MyOnClick {
+
+    private FirebaseFirestore db;
+
+    private ArrayList<DptAdminModel.DptAdminInfo> dptAdminArray;
+    ProgressBar deptAdminBar;
+    TextView errorTV;
+
 
     // recycler view.
     private DptAdminAdapter dptAdminAdapter = null;
     private RecyclerView dptAdminRV = null;
     private GestureDetectorCompat detector = null;
-    public static String KEY_DptAdmin919 = "";
+    public static DptAdminModel.DptAdminInfo KEY_DptAdmin;
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(getActivity(), "The position is " + position, Toast.LENGTH_SHORT).show();
-        RemoveDptAdminDialogBox dialogBox = new RemoveDptAdminDialogBox();
+        RemoveDptAdminDialogBox dialogBox = new RemoveDptAdminDialogBox(dptAdminAdapter, DptAdminModel.dptAdminArray);
         dialogBox.show((getActivity().getSupportFragmentManager()), "delete dialog");
     }
-//
-//    @Override
-//    public void callBackDialog() {
-//        dptAdminAdapter.notifyDataSetChanged();
-//    }
-
 
     //gesture listener
     private class RecyclerViewOnGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -199,11 +154,8 @@ public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapte
                 // handling single tap.
                 if (holder instanceof DptAdminAdapter.DptAdminViewHolder) {
                     int position = holder.getAdapterPosition();
-                    DptAdminModel myDptAdminModel = DptAdminModel.getSingleton();
-                    String itemClicked919 = myDptAdminModel.dptAdminArray.get(position).dpt_919;
-                    KEY_DptAdmin919 = itemClicked919;
-                    Toast.makeText(getContext(), " Item clicked is " + itemClicked919, Toast.LENGTH_SHORT).show();
-
+                    DptAdminModel myDptAdminModel = DptAdminModel.getSingleton(dptAdminArray);
+                    KEY_DptAdmin = myDptAdminModel.dptAdminArray.get(position);
                     Log.d("click", "clicked on item " + position);
                     return true;
                 }
@@ -217,26 +169,68 @@ public class ListAllDrtAdminsFragment extends Fragment implements DptAdminAdapte
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
 
-        View view = inflater.inflate(R.layout.fragment_list_all_dpt_admin, container, false);
+
+        final View view = inflater.inflate(R.layout.fragment_list_all_dpt_admin, container, false);
+        deptAdminBar = view.findViewById(R.id.deptAdminBar);
+        errorTV = view.findViewById(R.id.errorTV);
 
         Button removeBTN;
-        // recycler view code.
-        dptAdminAdapter = new DptAdminAdapter(this);
-        dptAdminRV = view.findViewById(R.id.myDptAdminRV);
-        dptAdminRV.setAdapter(dptAdminAdapter);
 
-        RecyclerView.LayoutManager myManager = new LinearLayoutManager(view.getContext());
-        dptAdminRV.setLayoutManager(myManager);
+        dptAdminArray = new ArrayList<>();
+        db.collection("users")
+                .whereEqualTo("role", "departmentAdmin")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> user = document.getData();
+                                dptAdminArray.add(new DptAdminModel.DptAdminInfo(
+                                        user.get("firstname").toString() + " " +
+                                                user.get("lastname").toString(),
+                                        user.get("studentId").toString(),
+                                        user.get("emailId").toString()
+                                ));
+                            }
 
-        detector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
+                            if (dptAdminArray.size() < 1) {
+                                errorTV.setText("No user found...!");
+                                errorTV.setVisibility(View.VISIBLE);
+                                deptAdminBar.setVisibility(View.GONE);
+                                return;
+                            }
 
-        dptAdminRV.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return detector.onTouchEvent(e);
-            }
-        });
+                            // recycler view code.
+                            dptAdminAdapter = new DptAdminAdapter(ListAllDrtAdminsFragment.this, dptAdminArray);
+                            dptAdminRV = view.findViewById(R.id.myDptAdminRV);
+                            dptAdminRV.setAdapter(dptAdminAdapter);
+                            deptAdminBar.setVisibility(View.GONE);
+
+
+                            RecyclerView.LayoutManager myManager = new LinearLayoutManager(view.getContext());
+                            dptAdminRV.setLayoutManager(myManager);
+
+                            detector = new GestureDetectorCompat(view.getContext(), new RecyclerViewOnGestureListener());
+
+                            dptAdminRV.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+                                @Override
+                                public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                                    return detector.onTouchEvent(e);
+                                }
+                            });
+                        } else {
+                            deptAdminBar.setVisibility(View.GONE);
+                            Log.w("ListAllBooks", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
 
 
         return view;
