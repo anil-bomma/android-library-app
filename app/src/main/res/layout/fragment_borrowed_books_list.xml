@@ -29,7 +29,7 @@
         android:padding="15dp"
         android:text="TextView"
         android:textColor="#F07878"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

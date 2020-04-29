@@ -119,10 +119,11 @@ public class BorrowBookFragment extends Fragment {
                 borrowedBook.put("borrowDate", currentDate);
                 borrowedBook.put("returnDate", returnDate);
 
-                db.collection("borrowedBooks").
-                        whereEqualTo("userID", MainActivity.user919).
-                        whereEqualTo("bookName", bName).
-                        get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                db.collection("borrowedBooks")
+                        .whereEqualTo("userID", MainActivity.user919)
+                        .whereEqualTo("bookName", bName)
+                        .whereEqualTo("return", "false")
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {

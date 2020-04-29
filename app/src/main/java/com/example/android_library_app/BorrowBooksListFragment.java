@@ -124,6 +124,25 @@ class BorrowedBooksAdapter extends RecyclerView.Adapter<BorrowedBooksAdapter.Bor
                     String bookName = borrowedBook.borrowedBookName;
                     String userId = borrowedBook.borrowedStudentId;
 
+                    db.collection("books")
+                            .whereEqualTo("title", bookName)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Map<String, Object> book = document.getData();
+                                            int count = Integer.parseInt(book.get("available").toString()) + 1;
+                                            book.put("available", count);
+                                            db.collection("books")
+                                                    .document(document.getId())
+                                                    .update(book);
+                                        }
+                                    }
+                                }
+                            });
+
                     db.collection("borrowedBooks")
                             .whereEqualTo("userID", userId)
                             .whereEqualTo("bookName", bookName)
@@ -224,7 +243,8 @@ public class BorrowBooksListFragment extends Fragment {
                     .whereEqualTo("userID", MainActivity.user919)
                     .whereEqualTo("return", "false");
         } else {
-            collection = db.collection("borrowedBooks");
+            collection = db.collection("borrowedBooks")
+                    .whereEqualTo("return", "false");
         }
         collection.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
