@@ -55,7 +55,11 @@ public class UserProfileFragment extends Fragment {
                         Map<String, Object> user = document.getData();
                         if (user.get("emailId").toString().equals(LoginActivity.email)) {
                             profile_userName.setText(user.get("firstname").toString() + " " + user.get("lastname").toString());
-                            profile_role.setText(user.get("role").toString());
+                            if(user.get("role").toString().equals("departmentAdmin")){
+                                profile_role.setText("Role: librarian");
+                            } else {
+                                profile_role.setText("Role: "+user.get("role").toString());
+                            }
                             profile_919.setText(user.get("studentId").toString());
                             profile_mailID.setText(user.get("emailId").toString());
                         }
