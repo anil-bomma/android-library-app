@@ -102,26 +102,10 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
     Once the user open the application even before login, they can view the <b>list of books</b> that are available in our library. They can view detailed <b>description of a book</b> by clicking on a particular book they want.
   </li>
   <li>
-    By reading the description the user can know wheather they want that book or not. If they want that book they can perform any of the two options persent. They are as follows: 
-    <ul>
-      <li>
-        One is to <b>view the location</b> of the book in the library and 
-      </li>
-      <li>
-        The other is to <b>borrow that book</b> from the library. 
-      </li>
-    </ul>
+    By reading the description the user can know wheather they want that book or not. If they want that book they can view location of it. If they want to <b>borrow that book</b> they can do it there itself.
   </li>
   <li>
-    To do any of the described actions the login to the application is required. If the user has already logged in and 
-    <ul>
-      <li>
-        Clicked on <b>view the location,</b> the user can see the location of book by section and rack ID of that corresponding book. 
-      </li>
-      <li>
-        Clicked on <b>borrow book,</b> the due date to return the book will be shown and an alert box is displayed to <b>confirm the borrow action</b>. Once user confirmed it, the book ID along with used ID will be added to the <b>borrowed books list</b> in database.
-      </li>
-    </ul>
+    To borrow a book the login to the application is required. If the user has already logged in and clicked on <b>borrow book,</b> the due date to return the book will be shown and an alert box is displayed to <b>confirm the borrow action</b>. Once user confirmed it, the book ID along with used ID will be added to the <b>borrowed books list</b> in database.<br>
     If they have not logged in before, the application will redirect them to <b>login activity</b>.
   </li>
   <li>
