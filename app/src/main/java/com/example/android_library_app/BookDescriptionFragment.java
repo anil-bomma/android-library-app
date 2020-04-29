@@ -54,6 +54,11 @@ public class BookDescriptionFragment extends Fragment {
         String language = ListAllBooksFragment.bookLanguage;
         languageTV.setText(language);
 
+        TextView locationTV = view.findViewById(R.id.BLocationTV);
+        String location = "Section: " + ListAllBooksFragment.bookSection + ", Rack Id: "
+                + ListAllBooksFragment.bookRack;
+        locationTV.setText(location);
+
         // borrow book code
         borrowBTN = view.findViewById(R.id.borrowBTN);
         borrowBTN.setOnClickListener(new View.OnClickListener() {
