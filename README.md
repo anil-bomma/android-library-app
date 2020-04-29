@@ -70,7 +70,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
     <li><b>UserID:</b> s537157@nwmissouri.edu</li>
     <li><b>Password:</b> 123456</li>
   </ul>
-  <h3>Login as Librarian/Department admin:</h3>
+  <h3>Login as Librarian</h3>
   <ul>
     <li><b>UserID:</b> s537240@nwmissouri.edu</li>
     <li><b>Password:</b> 123456</li>
@@ -109,7 +109,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
     If they have not logged in before, the application will redirect them to <b>login activity</b>.
   </li>
   <li>
-    If a user is new to the application, they should <b>register</b> with the personal information and then login using mail id and password. <b>(OR)</b> If already registered but had <b>forgot his/her password,</b> they can request for <b>resetting the password</b> and a <b>email</b> will be sent to the user with the instructions for resetting the password. Initially every user is added with role as student which can later be updated as Librarian/Department admin if the admin wants them to be.
+    If a user is new to the application, they should <b>register</b> with the personal information and then login using mail id and password. <b>(OR)</b> If already registered but had <b>forgot his/her password,</b> they can request for <b>resending the password</b> and a <b>email</b> will be sent to the user with the old password. Initially every user is added with role as student which can later be updated as Librarian if the admin wants them to be.
   </li>
   <li>
     So according to the user role the view of the application changes. 
@@ -120,12 +120,12 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
     </ul>
     <ul>
       <li>
-         If the User role is <b>Librarian/Depatment Admin</b>, they can perform all the actions done by the user. A part from that, if new books are bought by libary, those book details and the storage location can be <b>added(book) into database</b> by the him/her. They can also view the <b>list of books borrowed by students</b> along with their corresponding #919 number and due date to for every book.
+         If the User role is <b>Librarian</b>, they can perform all the actions done by the user. A part from that, if new books are bought by libary, those book details and the storage location can be <b>added(book) into database</b> by the him/her. They can also view the <b>list of books borrowed by students</b> along with their corresponding #919 number and due date to for every book.
       </li>
     </ul>
     <ul>
       <li>
-         If the User role is <b>Admin</b>, he/she can perform all the functionalities done by student and department admin. A part from that, they can also make a student as librarian/department admin by <b>adding them to Department Admin list</b>. This privilage is given only to admin. Admin can also view the <b>list of librarians/department admins</b> present. He/She can <b>remove</b> a person's role from librarian/department admin and make them a normal user that is, Student if they want.
+         If the User role is <b>Admin</b>, he/she can perform all the functionalities done by student and department admin. A part from that, they can view the <b>statistics of usage of books</b> present in the library.They can aslo make a student as librarian/department admin by <b>adding them to Librarian list</b>. This privilage is given only to admin. Admin can also view the <b>list of librarians</b> present. He/She can <b>remove</b> a person's role from librarian and make them a normal user that is, Student if they want.
       </li>
     </ul>
     </li>
@@ -262,7 +262,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
   Once the clicks on get verification code button in the above screen, if the mail Id entered matches mail ID's in database a verification code is sent to that mail ID to verify wheather the right person access the applictaion. The mail appears as follows. 
 </p>
 <p align="center">
-  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_gmailForgetPasswordCode.png" width="8000" height="500"/>
+  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_gmailForgetPasswordCode.png" width="900" height="500"/>
   <br>Fig: 14
 </p>
 
@@ -270,7 +270,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
   Once the verification code is sent to the mail. You will be allowed to enter the verification code as shown below. 
 </p>
 <p align="center">
-  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_forgetPasswordVerification.png" width="800" height="500"/>
+  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_forgetPasswordVerification.png" width="230" height="400"/>
   <br>Fig: 15
 </p>
 
@@ -279,7 +279,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
   Once the verification code entered matches the code sent, a mail with old password is sent to the mail so that the user can know the  password and login to their profile. 
 </p>
 <p align="center">
-  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_gmailPasswordSent.png" width="800" height="500"/>
+  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_gmailPasswordSent.png" width="900" height="500"/>
   <br>Fig: 16
 </p>
 
@@ -287,7 +287,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
 </h3>
 <ul>
   <p>1. Student</p>
-  <p>2. Department Admin/Librarian</p>
+  <p>2. Librarian</p>
   <p>3. Admin</p>
 </ul>
 
@@ -312,22 +312,13 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
   <br>Fig: 18
 </p>
 
-<h3>Location book:</h3>
-<p>
-  This screen appears when a user clicks on show locaion option which is present in description page of a selected book. This screen shows the loation of the book where it is present the huge B.D Owens library.
-  <br>Fig: 19
-</p>
-<!-- <p align="center">
-  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_.png" width="230" height="400"/>
-</p> -->
-
 <h3>List of the books borrowed by student:</h3>
 <p>
   This screen lists all the books the logged student have borrowed from the library along with its due date to return as shown below.
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_ListBorrowedBook.png" width="230" height="400"/>
-  <br>Fig: 20
+  <br>Fig: 19
 </p>
 
 <h3>User Profile:</h3>
@@ -336,7 +327,7 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_UserProfileScreen.png" width="230" height="400"/>
-  <br>Fig: 21
+  <br>Fig: 20
 </p>
 
 <h3>Change Password Screen:</h3>
@@ -345,36 +336,27 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_ChangePasswordScreen.png" width="230" height="400"/>
-  <br>Fig: 22
+  <br>Fig: 21
 </p>
 
-<h3> Other than the above mentioned functionality for general student users, the following are the screen that can be accessed by the user with role as <b>Department Admin/Librarian</b></h3>
+<h3> Other than the above mentioned functionality for general student users, the following are the screen that can be accessed by the user with role as <b>Librarian</b></h3>
 
-<h3>Navigation bar for a Department Admin/Librarian:</h3>
+<h3>Navigation bar for a Librarian:</h3>
 <p>
-  The following is the navigation bar for a Department Admin/Librarian showing all the functionalities they can do using this application.
+  The following is the navigation bar for a Librarian showing all the functionalities they can do using this application.
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_DptAdminNavBar.png" width="230" height="400"/>
+  <br>Fig: 22
+</p>
+
+<h3>Adding books to the database:</h3>
+<p>
+  If the library management bought new books, the department admin can add them to the database by entering the details of books in this screen.
+</p>
+<p align="center">
+  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_AddBook.png" width="230" height="400"/>
   <br>Fig: 23
-</p>
-
-<h3>Adding books to the database:</h3>
-<p>
-  If the library management bought new books, the department admin can add them to the database by entering the details of books in this screen.
-</p>
-<p align="center">
-  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_AddBook.png" width="230" height="400"/>
-  <br>Fig: 24
-</p>
-
-<h3>Adding books to the database:</h3>
-<p>
-  If the library management bought new books, the department admin can add them to the database by entering the details of books in this screen.
-</p>
-<p align="center">
-  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_AddBook.png" width="230" height="400"/>
-  <br>Fig: 25
 </p>
 
 <h3>List of the books borrowed by students:</h3>
@@ -383,10 +365,10 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_BorrowedBooksList.png" width="230" height="400"/>
-  <br>Fig: 26
+  <br>Fig: 24
 </p>
 
-<h3> Other than the above mentioned functionality for general student users and Department admin/Librarian, the following are the screen that can be accessed by the user with role as <b>Admin</b></h3>
+<h3> Other than the above mentioned functionality for general student users and Librarian, the following are the screen that can be accessed by the user with role as <b>Admin</b></h3>
 
 <h3>Navigation bar for a Admin:</h3>
 <p>
@@ -394,56 +376,67 @@ https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_AdminNavBar.png" width="230" height="400"/>
-  <br>Fig: 27
+  <br>Fig: 25
 </p>
 
-<h3>Find a Student</h3>
+<h3>Book statistics:</h3>
+<p>
+  This screen is only visible to admin. In this screen, admin can view the utilization of the books that are in library. For any book in the library that has been borrowed, the number of times it is borrowed can be seen her. We thought that this statistics will be if the admin wants to know the usage of the books in library.
+</p>
+<p align="center">
+  <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_bookStats.png" width="230" height="400"/>
+  <br>Fig: 26
+</p>
+
+<h3>Add a person as Librarian:</h3>
 <p>
   In this screen, if the admin wants a student to be employeed as department admin/Librarian, they can find the person by entering their #919 number and find the person as shown below.
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_AddDprAdmin.png" width="230" height="400"/>
-  <br>Fig: 28
+  <br>Fig: 27
 </p>
 
-<h3>Add a person as Department Admin/Librarian:</h3>
+<h3>After finding..</h3>
 <p>
-  In this screen, the details of student with matching #919 is shown as below. And if requied, the admin can update the selected student to promote as department admin/Librarian then and their itself by clicking on add button.
+  In this screen, the details of student with matching #919 is shown as. And if requied, the admin can update the selected student to promote as Librarian then and their itself by clicking on add button.
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_AddedDptAdmin.png" width="230" height="400"/>
-  <br>Fig: 29
+  <br>Fig: 28
 </p>
 
-<h3>User Profile of a person after updating the role to Department Admin/Librarian:</h3>
+<h3>User Profile of a person after updating the role to Librarian:</h3>
 <p>
-  Once a student's role is updated to Department Admin/Librarian this will be reflected in the user profile screen of that person. Before the role was <b>student</b> which is appearing in fig: now the role is updated to department admin as shown below.
+  Once a student's role is updated to Librarian this will be reflected in the user profile screen of that person. Before the role was <b>student</b> which is appearing in fig: now the role is updated to department admin as shown below.
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_DptUserProfile.png" width="230" height="400"/>
-  <br>Fig: 30
+  <br>Fig: 29
 </p>
 
-<h3>List all Department Admins/Librarians:</h3>
+<h3>List all Librarians:</h3>
 <p>
-  We can see the list of the Department Admins/Librarians who are employeed at present in this screen as shown below.
+  We can see the list of the Librarians who are employeed at present in this screen as shown below.
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_DptAdminList.png" width="230" height="400"/>
-  <br>Fig: 31
+  <br>Fig: 30
 </p>
 
-<h3>Remove a Department Admins/Librarians role and make them a student:</h3>
+<h3>Remove a Librarians role and make them a student:</h3>
 <p>
   From the above screen, we can see a remove button corresponding to each person in the list. If we click on any of the persons remove button, an alert box appears and ask for the conformation of the remove action to be performed as shown below.
 </p>
 <p align="center">
   <img  src="https://raw.githubusercontent.com/Rethima-Reddy/sample/master/Images/new_deleteDptAdminAlertBox.png" width="230" height="400"/>
-  <br>Fig: 32
+  <br>Fig: 31
 </p>
 <p>
   If the <b>REMOVE</b> is selected then that person is removed from the list immediately and their role will be updated to student in the database immediately.
 </p>
+
+
 
 <h2>Contributors:</h2>
 <ul>
