@@ -83,20 +83,20 @@ public class RegistrationScreen extends AppCompatActivity {
                 String emailId = emailIdET.getText().toString().trim();
                 String password = passwordET.getText().toString().trim();
 
-                if (firstname.isEmpty()) {
-                    firstnameET.setError("please enter the first name");
+                if (firstname.isEmpty() || firstname.length() < 4) {
+                    firstnameET.setError("please enter the first name minimum 3 letters");
                 }
-                if (lastname.isEmpty()) {
-                    lastnameET.setError("please enter the last name");
+                if (lastname.isEmpty() || lastname.length() < 2) {
+                    lastnameET.setError("please enter the last name minimum 1 letters");
                 }
-                if (studentId.isEmpty()) {
-                    studentIdET.setError("please enter the 919 id");
+                if (studentId.isEmpty() || studentId.length() < 10) {
+                    studentIdET.setError("please enter the 919 id, minimum 10 digit");
                 }
                 if (emailId.isEmpty()) {
                     emailIdET.setError("please enter the email id");
                 }
-                if (password.isEmpty()) {
-                    passwordET.setError("please enter the password");
+                if (password.isEmpty() || password.length() < 6) {
+                    passwordET.setError("please enter the password, minimum 5 digit");
                 }
 
                 // received all input attributes from user now send verification code
@@ -146,37 +146,43 @@ public class RegistrationScreen extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                     @Override
                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                        // check login ways
-                        boolean check = task.getResult().getSignInMethods().isEmpty();
+                        if (task.isSuccessful()) {
+                            // check login ways
+                            boolean check = task.getResult().getSignInMethods().isEmpty();
 
-                        if (check) {
-                            // build subject and message for login
-                            String subject = "B.D. Owens Library, Registration verification code";
-                            String message = String.format(
-                                    "Hello %s %s, here is the verification code for registration: %s" +
-                                            "%n%nThank you, %nTeam Library",
-                                    firstname, lastname, vCode);
+                            if (check) {
+                                // build subject and message for login
+                                String subject = "B.D. Owens Library, Registration verification code";
+                                String message = String.format(
+                                        "Hello %s %s, here is the verification code for registration: %s" +
+                                                "%n%nThank you, %nTeam Library",
+                                        firstname, lastname, vCode);
 
-                            // sending verification code to user and sending to next intent also
-                            GmailServer mailServer = new GmailServer(
-                                    RegistrationScreen.this,
-                                    emailId, subject, message);
-                            mailServer.execute();
-
-                            try {
-                                TimeUnit.SECONDS.sleep(5);
-                            } catch (InterruptedException e) {
-                                System.out.println("error while sending error: " + e);
-                                Toast.makeText(
+                                // sending verification code to user and sending to next intent also
+                                GmailServer mailServer = new GmailServer(
                                         RegistrationScreen.this,
-                                        "Error while sending message",
-                                        Toast.LENGTH_SHORT
-                                ).show();
+                                        emailId, subject, message);
+                                mailServer.execute();
+
+                                try {
+                                    TimeUnit.SECONDS.sleep(5);
+                                } catch (InterruptedException e) {
+                                    System.out.println("error while sending error: " + e);
+                                    Toast.makeText(
+                                            RegistrationScreen.this,
+                                            "Error while sending message",
+                                            Toast.LENGTH_SHORT
+                                    ).show();
+                                }
+                                startActivity(registerVerifyIntent);
+                                finish();
+                            } else {
+                                emailIdET.setError("Email Id already register.");
                             }
-                            startActivity(registerVerifyIntent);
-                            finish();
                         } else {
-                            emailIdET.setError("Email Id already register.");
+                            emailIdET.setError("Invalid email id, please check the email id");
+                            Toast.makeText(getApplicationContext(),
+                                    "Invalid details please check", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
