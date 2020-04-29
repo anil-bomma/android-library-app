@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_book_stats"
+            android:icon="@drawable/ic_track_changes_black_24dp"
+            android:title="Books Stats" />
+        <item
             android:id="@+id/nav_list_all_books"
             android:icon="@drawable/ic_library_books"
             android:title="List All Books" />

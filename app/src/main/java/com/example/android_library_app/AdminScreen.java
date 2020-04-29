@@ -87,6 +87,10 @@ public class AdminScreen extends AppCompatActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
         switch (menuItem.getItemId()) {
+            case R.id.nav_book_stats:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new BooksStatsListFragment()).addToBackStack(null).commit();
+                break;
             case R.id.nav_list_all_books:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ListAllBooksFragment()).addToBackStack(null).commit();

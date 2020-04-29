@@ -27,6 +27,7 @@ public class UserRoleBasedNavigation {
         } else {
 
             System.out.println("User found with different role");
+            nav_menu.findItem(R.id.nav_book_stats).setVisible(false);
             nav_menu.findItem(R.id.nav_login).setVisible(true);
             nav_menu.findItem(R.id.nav_register).setVisible(true);
             nav_menu.findItem(R.id.nav_logout).setVisible(false);
@@ -40,6 +41,7 @@ public class UserRoleBasedNavigation {
 
     // navigation bar for setting the admin user
     public void setNavigationForAdmin(Context context, String userId) {
+        nav_menu.findItem(R.id.nav_book_stats).setVisible(true);
         nav_menu.findItem(R.id.nav_add_dept_admin).setVisible(true);
         nav_menu.findItem(R.id.nav_list_all_dept_admin).setVisible(true);
         nav_menu.findItem(R.id.nav_add_book).setVisible(true);
@@ -52,6 +54,7 @@ public class UserRoleBasedNavigation {
 
     // navigation bar for setting the departmentAdmin user
     public void setNavigationForDepartmentAdmin(Context context, String userId) {
+        nav_menu.findItem(R.id.nav_book_stats).setVisible(false);
         nav_menu.findItem(R.id.nav_add_dept_admin).setVisible(false);
         nav_menu.findItem(R.id.nav_list_all_dept_admin).setVisible(false);
         nav_menu.findItem(R.id.nav_add_book).setVisible(true);
@@ -64,6 +67,7 @@ public class UserRoleBasedNavigation {
 
     // navigation bar for setting the student
     public void setNavigationForStudent(Context context, String userId) {
+        nav_menu.findItem(R.id.nav_book_stats).setVisible(false);
         nav_menu.findItem(R.id.nav_add_dept_admin).setVisible(false);
         nav_menu.findItem(R.id.nav_list_all_dept_admin).setVisible(false);
         nav_menu.findItem(R.id.nav_add_book).setVisible(false);
