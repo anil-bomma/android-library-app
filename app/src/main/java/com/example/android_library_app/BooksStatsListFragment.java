@@ -23,6 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -84,8 +86,10 @@ class BooksStatsAdapter extends RecyclerView.Adapter<BooksStatsAdapter.BorrowedB
     public void onBindViewHolder(@NonNull final BorrowedBooksViewHolder holder, final int position) {
         TextView borrowedBookName = holder.convienceViewReference.findViewById(R.id.bookName);
         borrowedBookName.setText(borrowedBooksModel.borrowedbooksArray.get(position).borrowedBookName);
+        TextView slnoTV = holder.convienceViewReference.findViewById(R.id.slnoTV);
+        slnoTV.setText(String.format("#%d", position + 1));
         TextView count = holder.convienceViewReference.findViewById(R.id.countTV);
-        count.setText(borrowedBooksModel.borrowedbooksArray.get(position).count + "\nHits");
+        count.setText(borrowedBooksModel.borrowedbooksArray.get(position).count + " members have took so far..");
     }
 
     @Override
