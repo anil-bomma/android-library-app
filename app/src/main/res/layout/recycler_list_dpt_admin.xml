@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,16 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_margin="10dp"
-        android:orientation="horizontal"
-        android:background="@color/light_blue">
+        android:background="@color/light_blue"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="70dp"
             android:layout_height="75dp"
             android:layout_gravity="start"
-            android:src="@drawable/ic_person_black_24dp"/>
+            android:src="@drawable/ic_person_black_24dp" />
+
         <LinearLayout
-            android:layout_width="240dp"
+            android:layout_width="235dp"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
             android:orientation="vertical">
@@ -32,27 +30,31 @@
                 android:text="Depatment Admin name"
                 android:textSize="17dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/dpt_admin_919TV"
-                android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="#919 number"/>
+                android:layout_marginStart="5dp"
+                android:text="#919 number"
+                android:textSize="15dp" />
+
             <TextView
                 android:id="@+id/dpt_name"
-                android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Depertment Name"/>
+                android:layout_marginStart="5dp"
+                android:text="Depertment Name"
+                android:textSize="15dp" />
         </LinearLayout>
+
         <Button
             android:id="@+id/removeDptAdminButton"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="end"
             android:background="@drawable/button_back_ground"
-            android:text="Remove"/>
+            android:text="Remove" />
+
     </LinearLayout>
 </LinearLayout>
