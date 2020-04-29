@@ -193,6 +193,34 @@
         app:layout_constraintTop_toBottomOf="@+id/BTitleTV" />
 
     <TextView
+        android:id="@+id/BDLocationTV"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Location: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BPublisherTV" />
+
+    <TextView
+        android:id="@+id/BLocationTV"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="216dp"
+        android:text="Book Location "
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toEndOf="@+id/BDTitleTV"
+        app:layout_constraintTop_toBottomOf="@+id/BTitleTV" />
+
+    <TextView
         android:id="@+id/BDDescriptionTV"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -204,14 +232,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BPublisherTV" />
-
+        app:layout_constraintTop_toBottomOf="@+id/BLocationTV" />
     <TextView
         android:id="@+id/BDescriptionTV"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="256dp"
         android:text="Book Description "
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
