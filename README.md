@@ -42,7 +42,7 @@ An android application which is used for searching and renting books from a libr
    
    
 <h2>APK file</h2>
-https://github.com/anil-bomma/android-library-app/blob/master/LibraryApk.apk
+<a href="android-library-app.apk">android-library-app.apk</a>
     
     
     
