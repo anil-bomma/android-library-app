@@ -166,7 +166,7 @@ public class ListAllBooksFragment extends Fragment {
                     bookSection = myModel.booksArray.get(position).sectionID;
                     bookRack = myModel.booksArray.get(position).rackID;
 
-                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
 
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     transaction.add(R.id.fragment_container, bookDescriptionFragment, "book description");

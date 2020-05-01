@@ -43,10 +43,13 @@ class SearchBooksModel {
         public String description;
         public String publisher;
         public String language;
+        public String sectionId;
+        public String rackId;
 
 
         public SearchBooksInfo(String title, String author, String genre, String description,
-                               String publisher, String language, String available) {
+                               String publisher, String language, String available,
+                               String sectionId, String rackId) {
             this.title = title;
             this.author = author;
             this.genre = genre;
@@ -54,6 +57,8 @@ class SearchBooksModel {
             this.description = description;
             this.publisher = publisher;
             this.language = language;
+            this.sectionId = sectionId;
+            this.rackId = rackId;
         }
     }
 
@@ -155,6 +160,8 @@ public class SearchBookFragment extends Fragment {
                     ListAllBooksFragment.bookDescription = myModel.searchBooksArray.get(position).description;
                     ListAllBooksFragment.bookPublisher = myModel.searchBooksArray.get(position).publisher;
                     ListAllBooksFragment.bookLanguage = myModel.searchBooksArray.get(position).language;
+                    ListAllBooksFragment.bookSection = myModel.searchBooksArray.get(position).sectionId;
+                    ListAllBooksFragment.bookRack = myModel.searchBooksArray.get(position).rackId;
 
 
 //                    Toast.makeText(getContext(), bookTitle, Toast.LENGTH_SHORT).show();
@@ -217,9 +224,11 @@ public class SearchBookFragment extends Fragment {
                     return;
                 }
 
+                String capsName = bookName.substring(0, 1).toUpperCase() + bookName.substring(1);
+
                 db.collection("books")
-                        .whereGreaterThanOrEqualTo("title", bookName)
-                        .whereLessThanOrEqualTo("title", bookName + "\uf8ff")
+                        .whereGreaterThanOrEqualTo("title", capsName)
+                        .whereLessThanOrEqualTo("title", capsName + "\uf8ff")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -234,7 +243,10 @@ public class SearchBookFragment extends Fragment {
                                                 book.get("description").toString(),
                                                 book.get("publisher").toString(),
                                                 book.get("language").toString(),
-                                                book.get("available").toString()
+                                                book.get("available").toString(),
+                                                book.get("sectionID").toString(),
+                                                book.get("rackID").toString()
+
                                         ));
                                     }
 

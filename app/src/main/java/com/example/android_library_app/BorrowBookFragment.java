@@ -85,6 +85,10 @@ public class BorrowBookFragment extends Fragment {
         borrowBookReturnDate = view.findViewById(R.id.borrowBookReturnDate);
         borrowBookReturnDate.setText(returnDate);
 
+        if (count < 1) {
+            borrowBookDate.setText("Not Available");
+            borrowBookReturnDate.setText("Not Available");
+        }
 
         // Database code
         db = FirebaseFirestore.getInstance();
