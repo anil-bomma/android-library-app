@@ -85,18 +85,30 @@ public class RegistrationScreen extends AppCompatActivity {
 
                 if (firstname.isEmpty() || firstname.length() < 4) {
                     firstnameET.setError("please enter the first name minimum 3 letters");
+                    return;
                 }
                 if (lastname.isEmpty() || lastname.length() < 2) {
                     lastnameET.setError("please enter the last name minimum 1 letters");
+                    return;
                 }
-                if (studentId.isEmpty() || studentId.length() < 10) {
-                    studentIdET.setError("please enter the 919 id, minimum 10 digit");
+                if (studentId.isEmpty()) {
+                    studentIdET.setError("please enter the 919 id");
                 }
                 if (emailId.isEmpty()) {
                     emailIdET.setError("please enter the email id");
                 }
+                String[] emailArr = emailId.split("@");
+                if (emailArr.length == 1) {
+                    emailIdET.setError("please enter valid email id");
+                    return;
+                }
+                if (!emailId.contains("@nwmissouri.edu")) {
+                    emailIdET.setError("please enter valid Northwest student email-id");
+                    return;
+                }
                 if (password.isEmpty() || password.length() < 6) {
                     passwordET.setError("please enter the password, minimum 5 digit");
+                    return;
                 }
 
                 // received all input attributes from user now send verification code
