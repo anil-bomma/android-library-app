@@ -78,6 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                         loginBar.setVisibility(View.GONE);
                         passwordET.setError("Please enter your password");
                     } else {
+                        String[] emailArr = email.split("@");
+                        if (emailArr.length == 1) {
+                            email += "@nwmissouri.edu";
+                        }
                         authenticateUsernamePassword(email, password);
                     }
                 }
