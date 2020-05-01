@@ -34,7 +34,7 @@
             android:drawableLeft="@drawable/ic_person_black_24dp"
             android:paddingLeft="15dp"
             android:drawablePadding="10dp"
-            android:hint="Email Id"
+            android:hint="Email Id or Username"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="18dp"
